@@ -1,5 +1,5 @@
 //
-//  SmallWidgetViews.swift
+//  WidgetObjectViews.swift
 //  Widgit
 //
 //  Created by Jacob Tepperman on 2020-09-06.
@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-struct SmallWidgetLink: View {
-	var editor: SmallWidgetEditor
+struct WidgetObjectLink: View {
+	var editor: WidgetObjectEditor
 
 	var body: some View {
 		NavigationLink(destination: editor) {
@@ -45,7 +45,7 @@ struct SmallWidgetLink: View {
 	}
 }
 
-struct SmallWidgetEditor: View {
+struct WidgetObjectEditor: View {
 	var body: some View {
 			Text("Hello")
 	}
@@ -54,7 +54,7 @@ struct SmallWidgetEditor: View {
 struct SmallWidgetViews_Previews: PreviewProvider {
 	static var previews: some View {
 		NavigationView{
-			SmallWidgetLink(editor: SmallWidgetEditor())
+			WidgetObjectLink(editor: WidgetObjectEditor())
 		}
 	}
 }
