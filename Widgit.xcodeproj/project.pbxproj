@@ -13,6 +13,9 @@
 		0CBBC27E2505492A006DC736 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0CBBC27D2505492A006DC736 /* Preview Assets.xcassets */; };
 		0CBBC2892505492B006DC736 /* WidgitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CBBC2882505492B006DC736 /* WidgitTests.swift */; };
 		0CBBC2942505492B006DC736 /* WidgitUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CBBC2932505492B006DC736 /* WidgitUITests.swift */; };
+		0CBBC2A425054A9B006DC736 /* SmallWidgetViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CBBC2A325054A9B006DC736 /* SmallWidgetViews.swift */; };
+		0CBBC2A625054AA6006DC736 /* MediumWidgetViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CBBC2A525054AA6006DC736 /* MediumWidgetViews.swift */; };
+		0CBBC2A825054AAE006DC736 /* LargeWidgetViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CBBC2A725054AAE006DC736 /* LargeWidgetViews.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +48,10 @@
 		0CBBC28F2505492B006DC736 /* WidgitUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WidgitUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0CBBC2932505492B006DC736 /* WidgitUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgitUITests.swift; sourceTree = "<group>"; };
 		0CBBC2952505492B006DC736 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0CBBC2A1250549C6006DC736 /* Widgit.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Widgit.entitlements; sourceTree = "<group>"; };
+		0CBBC2A325054A9B006DC736 /* SmallWidgetViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallWidgetViews.swift; sourceTree = "<group>"; };
+		0CBBC2A525054AA6006DC736 /* MediumWidgetViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediumWidgetViews.swift; sourceTree = "<group>"; };
+		0CBBC2A725054AAE006DC736 /* LargeWidgetViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LargeWidgetViews.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,8 +102,9 @@
 		0CBBC27525054927006DC736 /* Widgit */ = {
 			isa = PBXGroup;
 			children = (
+				0CBBC2A1250549C6006DC736 /* Widgit.entitlements */,
 				0CBBC27625054927006DC736 /* WidgitApp.swift */,
-				0CBBC27825054927006DC736 /* ContentView.swift */,
+				0CBBC2A225054A79006DC736 /* Views */,
 				0CBBC27A2505492A006DC736 /* Assets.xcassets */,
 				0CBBC27F2505492A006DC736 /* Info.plist */,
 				0CBBC27C2505492A006DC736 /* Preview Content */,
@@ -128,6 +136,17 @@
 				0CBBC2952505492B006DC736 /* Info.plist */,
 			);
 			path = WidgitUITests;
+			sourceTree = "<group>";
+		};
+		0CBBC2A225054A79006DC736 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				0CBBC27825054927006DC736 /* ContentView.swift */,
+				0CBBC2A325054A9B006DC736 /* SmallWidgetViews.swift */,
+				0CBBC2A525054AA6006DC736 /* MediumWidgetViews.swift */,
+				0CBBC2A725054AAE006DC736 /* LargeWidgetViews.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -259,7 +278,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0CBBC2A825054AAE006DC736 /* LargeWidgetViews.swift in Sources */,
 				0CBBC27925054927006DC736 /* ContentView.swift in Sources */,
+				0CBBC2A625054AA6006DC736 /* MediumWidgetViews.swift in Sources */,
+				0CBBC2A425054A9B006DC736 /* SmallWidgetViews.swift in Sources */,
 				0CBBC27725054927006DC736 /* WidgitApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -417,6 +439,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Widgit/Widgit.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Widgit/Preview Content\"";
 				DEVELOPMENT_TEAM = BLAVQ37GJV;
@@ -427,7 +450,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = jtepp.Widgit;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jtepp.Widgit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -439,6 +462,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Widgit/Widgit.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Widgit/Preview Content\"";
 				DEVELOPMENT_TEAM = BLAVQ37GJV;
@@ -449,7 +473,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = jtepp.Widgit;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jtepp.Widgit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
