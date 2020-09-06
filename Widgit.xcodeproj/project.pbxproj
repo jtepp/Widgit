@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0C1002C925055B3A007BCAC0 /* WidgetObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C1002C825055B3A007BCAC0 /* WidgetObject.swift */; };
 		0CBBC27725054927006DC736 /* WidgitApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CBBC27625054927006DC736 /* WidgitApp.swift */; };
 		0CBBC27925054927006DC736 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CBBC27825054927006DC736 /* ContentView.swift */; };
 		0CBBC27B2505492A006DC736 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0CBBC27A2505492A006DC736 /* Assets.xcassets */; };
@@ -34,6 +35,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0C1002C825055B3A007BCAC0 /* WidgetObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetObject.swift; sourceTree = "<group>"; };
 		0CBBC27325054927006DC736 /* Widgit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Widgit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0CBBC27625054927006DC736 /* WidgitApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgitApp.swift; sourceTree = "<group>"; };
 		0CBBC27825054927006DC736 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -75,6 +77,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0C1002C725055B2C007BCAC0 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				0C1002C825055B3A007BCAC0 /* WidgetObject.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		0CBBC26A25054927006DC736 = {
 			isa = PBXGroup;
 			children = (
@@ -100,6 +110,7 @@
 			children = (
 				0CBBC2A1250549C6006DC736 /* Widgit.entitlements */,
 				0CBBC27625054927006DC736 /* WidgitApp.swift */,
+				0C1002C725055B2C007BCAC0 /* Models */,
 				0CBBC2A225054A79006DC736 /* Views */,
 				0CBBC27A2505492A006DC736 /* Assets.xcassets */,
 				0CBBC27F2505492A006DC736 /* Info.plist */,
@@ -272,6 +283,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0C1002C925055B3A007BCAC0 /* WidgetObject.swift in Sources */,
 				0CBBC27925054927006DC736 /* ContentView.swift in Sources */,
 				0CBBC2A425054A9B006DC736 /* WidgetObjectViews.swift in Sources */,
 				0CBBC27725054927006DC736 /* WidgitApp.swift in Sources */,
