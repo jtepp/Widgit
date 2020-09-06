@@ -13,3 +13,12 @@ struct WidgetObject: Identifiable {
 	var width: CGFloat
 	var height: CGFloat
 }
+
+extension CGFloat {
+	func long() -> CGFloat {
+		return 300
+	}
+	func short() -> CGFloat {
+		return 100
+	}
+}
