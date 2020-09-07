@@ -51,6 +51,7 @@ struct WidgetObjectLink: View {
 
 struct WidgetObjectEditor: View {
 	@Binding var object: WidgetObject
+	
 	var body: some View {
 		Text("Hello")
 	}

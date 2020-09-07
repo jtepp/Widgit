@@ -13,9 +13,11 @@ struct ContentView: View {
 		
 		NavigationView {
 			ScrollView {
-				ForEach(widgets) { w in
-					WidgetObjectLink(object: $w)
-				}
+				//				ForEach(widgets) { w in
+				WidgetObjectLink(object: $widgets[0])
+				WidgetObjectLink(object: $widgets[1])
+				WidgetObjectLink(object: $widgets[2])
+				//				}
 			}
 			.background(
 				LinearGradient(gradient: Gradient(colors: [Color("start"), Color("end")]), startPoint: .topLeading, endPoint: .bottomTrailing)
@@ -76,7 +78,7 @@ func ioLoadData(sub:String, to: inout Dictionary<String, String>) {
 
 func loadData(sub:String) -> Dictionary<String, String> {
 	do {
-		let x = try String(contentsOf: URL(string: "https://reddit.com/r/clashroyale" + sub + ".json")!)
+		let x = try String(contentsOf: URL(string: "https://reddit.com/r/" + sub + ".json")!)
 		let y = convertStringToDictionary(text: x)!
 		return y["data"] as! Dictionary<String, String>
 	} catch {}
