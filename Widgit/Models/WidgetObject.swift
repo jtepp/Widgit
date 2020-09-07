@@ -7,18 +7,14 @@
 
 import SwiftUI
 
+
+
+
 struct WidgetObject: Identifiable {
 	var id = UUID()
 	var sizeName: String
 	var width: CGFloat
 	var height: CGFloat
+	static let placeholder = WidgetObject(sizeName: "Small", width: 100, height: 100)
 }
 
-extension CGFloat {
-	func long() -> CGFloat {
-		return 300
-	}
-	func short() -> CGFloat {
-		return 100
-	}
-}

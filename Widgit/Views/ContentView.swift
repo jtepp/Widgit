@@ -8,14 +8,28 @@
 import SwiftUI
 
 struct ContentView: View {
-    var body: some View {
-        Text("Hello, world!")
-            .padding()
-    }
+	var defaults = UserDefaults.init(suiteName: "group.com.jtepp.Widgit")
+	var widgets = [WidgetObject.placeholder, WidgetObject.placeholder, WidgetObject.placeholder]
+	var body: some View {
+		
+		NavigationView {
+			ScrollView {
+				ForEach(widgets) { size in
+					WidgetObjectLink(object: size)
+				}
+			}
+			.background(
+				LinearGradient(gradient: Gradient(colors: [Color("start"), Color("end")]), startPoint: .topLeading, endPoint: .bottomTrailing)
+					.edgesIgnoringSafeArea(.all)
+			)
+			.navigationTitle("Home")
+		}
+	}
 }
 
 struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
-    }
+	static var previews: some View {
+		ContentView()
+//			.preferredColorScheme(.dark)
+	}
 }
