@@ -19,4 +19,3 @@ struct WidgetObject: Identifiable, Codable {
 	static let placeholderM = WidgetObject(sizeName: "Medium", width: 250, height: 100)
 	static let placeholderL = WidgetObject(sizeName: "Large", width: 250, height: 250)
 }
-
