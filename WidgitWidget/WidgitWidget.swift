@@ -68,7 +68,7 @@ struct PlaceholderView: View {
 }
 
 
-@main struct WidgetWidget: Widget {
+@main struct WidgitWidget: Widget {
 	private let kind = "WidgitWidget"
 	var body: some WidgetConfiguration {
 		StaticConfiguration(kind: kind, provider: Provider(), placeholder: PlaceholderView()) {
