@@ -13,8 +13,8 @@ struct ContentView: View {
 		
 		NavigationView {
 			ScrollView {
-				ForEach(widgets) { size in
-					WidgetObjectLink(object: size)
+				ForEach(widgets) { w in
+					WidgetObjectLink(object: $w)
 				}
 			}
 			.background(
@@ -25,7 +25,6 @@ struct ContentView: View {
 		}
 		.onAppear(){
 			let decoder = JSONDecoder()
-			
 			if let savedSmall = defaults.object(forKey: "Small") as? Data {
 				if let loadedSmall = try? decoder.decode(WidgetObject.self, from: savedSmall) {
 					widgets[0] = loadedSmall
@@ -52,4 +51,34 @@ struct ContentView_Previews: PreviewProvider {
 		ContentView()
 			.preferredColorScheme(.dark)
 	}
+}
+
+
+func convertStringToDictionary(text: String) -> [String:AnyObject]? {
+	if let data = text.data(using: .utf8) {
+		do {
+			let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String:AnyObject]
+			return json
+		} catch {
+			print("Something went wrong")
+		}
+	}
+	return nil
+}
+
+func ioLoadData(sub:String, to: inout Dictionary<String, String>) {
+	do {
+		let x = try String(contentsOf: URL(string: "https://reddit.com/r/" + sub + ".json")!)
+		let y = convertStringToDictionary(text: x)!
+		to = y["data"] as! Dictionary<String, String>
+	} catch {}
+}
+
+func loadData(sub:String) -> Dictionary<String, String> {
+	do {
+		let x = try String(contentsOf: URL(string: "https://reddit.com/r/clashroyale" + sub + ".json")!)
+		let y = convertStringToDictionary(text: x)!
+		return y["data"] as! Dictionary<String, String>
+	} catch {}
+	return Dictionary<String, String>()
 }

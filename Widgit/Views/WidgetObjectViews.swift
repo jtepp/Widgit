@@ -8,9 +8,9 @@
 import SwiftUI
 
 struct WidgetObjectLink: View {
-	var object: WidgetObject
+	@Binding var object: WidgetObject
 	var body: some View {
-		NavigationLink(destination: WidgetObjectEditor(object: object)) {
+		NavigationLink(destination: WidgetObjectEditor(object: $object)) {
 			VStack {
 				HStack() {
 					Text(object.sizeName + " Widget")
@@ -50,14 +50,14 @@ struct WidgetObjectLink: View {
 }
 
 struct WidgetObjectEditor: View {
-	var object: WidgetObject
+	@Binding var object: WidgetObject
 	var body: some View {
 		Text("Hello")
 	}
 }
 
-struct SmallWidgetViews_Previews: PreviewProvider {
-	static var previews: some View {
-		WidgetObjectLink(object: WidgetObject.placeholder)
-	}
-}
+//struct SmallWidgetViews_Previews: PreviewProvider {
+//	static var previews: some View {
+////		WidgetObjectLink(object: WidgetObject.placeholder)
+//	}
+//}

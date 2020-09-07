@@ -75,6 +75,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0C03A4CE2505CC810053EE3F /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
 		0C1002C725055B2C007BCAC0 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -114,6 +121,7 @@
 		0CBBC27525054927006DC736 /* Widgit */ = {
 			isa = PBXGroup;
 			children = (
+				0C03A4CE2505CC810053EE3F /* Preview Content */,
 				0CBBC2A1250549C6006DC736 /* Widgit.entitlements */,
 				0CBBC27625054927006DC736 /* WidgitApp.swift */,
 				0C91BC072505BAC500193BE3 /* Resources */,
