@@ -14,13 +14,17 @@ struct WidgetObjectLink: View {
 			VStack {
 				HStack() {
 					Text(object.sizeName + " Widget")
-						.foregroundColor(.black)
+						.foregroundColor(
+							Color("blackwhite")
+						)
 						.font(.headline)
 						.padding(.init(top: 10, leading: 20, bottom: -5, trailing: 0))
 					Spacer()
 				}
 				Divider()
+					.background(Color("blackwhite").opacity(0.6))
 					.padding(.horizontal)
+					
 				RoundedRectangle(cornerRadius: 20)
 					.frame(width: object.width, height: object.height, alignment: .center)
 					.shadow(radius: 10, x: 8, y: 8)
