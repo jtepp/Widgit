@@ -9,6 +9,7 @@ import SwiftUI
 var defaults = UserDefaults.init(suiteName: "group.com.jtepp.Widgit")!
 struct ContentView: View {
 	@State var widgets = [WidgetObject.placeholder, WidgetObject.placeholderM, WidgetObject.placeholderL]
+	@State var data = [[String:String]]()
 	var body: some View {
 		
 		NavigationView {
@@ -26,6 +27,7 @@ struct ContentView: View {
 			.navigationTitle("Home")
 		}
 		.onAppear(){
+			loadData(to: &data, sub: "clashroyale")
 			let decoder = JSONDecoder()
 			if let savedSmall = defaults.object(forKey: "Small") as? Data {
 				if let loadedSmall = try? decoder.decode(WidgetObject.self, from: savedSmall) {
@@ -44,6 +46,7 @@ struct ContentView: View {
 					widgets[2] = loadedLarge
 				}
 			}
+//			print(data)
 		}
 	}
 }
@@ -56,31 +59,27 @@ struct ContentView_Previews: PreviewProvider {
 }
 
 
-func convertStringToDictionary(text: String) -> [String:AnyObject]? {
+func convertStringToDictionary(text: String) -> [[String:String]] {
 	if let data = text.data(using: .utf8) {
 		do {
-			let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String:AnyObject]
+			let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as! [[String:String]]
 			return json
 		} catch {
 			print("Something went wrong")
 		}
 	}
-	return nil
+	return [[String:String]]()
 }
 
-func ioLoadData(sub:String, to: inout Dictionary<String, String>) {
+public func loadData(to: inout [[String:String]], sub: String, sort: String = "hot", limit: Int = 2) {
 	do {
-		let x = try String(contentsOf: URL(string: "https://reddit.com/r/" + sub + ".json")!)
-		let y = convertStringToDictionary(text: x)!
-		to = y["data"] as! Dictionary<String, String>
+		var s =  "https://allpurpose.netlify.app/.netlify/functions/reddit?"
+		s = s + "sub=" + sub
+		s = s + "&sort=" + sort
+		s = s + "&limit=" + String(limit + 1)
+		let url = URL(string: s)
+		let a = try String(contentsOf: url!)
+		to = convertStringToDictionary(text: String(a))
+		
 	} catch {}
-}
-
-func loadData(sub:String) -> Dictionary<String, String> {
-	do {
-		let x = try String(contentsOf: URL(string: "https://reddit.com/r/" + sub + ".json")!)
-		let y = convertStringToDictionary(text: x)!
-		return y["data"] as! Dictionary<String, String>
-	} catch {}
-	return Dictionary<String, String>()
 }
