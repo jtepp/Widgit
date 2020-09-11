@@ -29,40 +29,93 @@ struct Provider: TimelineProvider {
 	
 	
 	func getSnapshot(in context: Context, completion: @escaping (Entry) -> ()) {
-		let entry = WidgetObjectEntry(object: [WidgetObject.placeholder, WidgetObject.placeholderM, WidgetObject.placeholderL], data:[[String:String]]())
+		
+		
+		var small = WidgetObject(sizeName: "", width: 0, height: 0, count: 0, maxPosts: 0);
+		if let savedSmall = defaults.object(forKey: "Small") as? Data {
+			if let loadedSmall = try? decoder.decode(WidgetObject.self, from: savedSmall) {
+				small = loadedSmall
+				widgets[0] = loadedSmall
+				
+				print(loadedSmall)} else {print("Small")}
+		}
+		
+		
+		var medium = WidgetObject(sizeName: "", width: 0, height: 0, count: 0, maxPosts: 0);
+		if let savedMedium = defaults.object(forKey: "Medium") as? Data {
+			if let loadedMedium = try? decoder.decode(WidgetObject.self, from: savedMedium) {
+				medium = loadedMedium
+				widgets[1] = loadedMedium
+				print(loadedMedium)} else {print("Medium")}
+		}
+		var large = WidgetObject(sizeName: "", width: 0, height: 0, count: 0, maxPosts: 0);
+		if let savedLarge = defaults.object(forKey: "Large") as? Data {
+			if let loadedLarge = try? decoder.decode(WidgetObject.self, from: savedLarge) {
+				large = loadedLarge
+				
+				widgets[2] = loadedLarge
+				print(loadedLarge)
+				
+			} else {print("Large")}
+		}
+		
+		let entry = WidgetObjectEntry(object: [small, medium, large], data:returnLoadData())
 		completion(entry)
 	}
 	func getTimeline(in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
-		
+		var small = WidgetObject(sizeName: "", width: 0, height: 0, count: 0, maxPosts: 0);
 		if let savedSmall = defaults.object(forKey: "Small") as? Data {
 			if let loadedSmall = try? decoder.decode(WidgetObject.self, from: savedSmall) {
+				small = loadedSmall
 				widgets[0] = loadedSmall
-			}
+				
+				print(loadedSmall)} else {print("Small")}
 		}
 		
+		
+		var medium = WidgetObject(sizeName: "", width: 0, height: 0, count: 0, maxPosts: 0);
 		if let savedMedium = defaults.object(forKey: "Medium") as? Data {
 			if let loadedMedium = try? decoder.decode(WidgetObject.self, from: savedMedium) {
+				medium = loadedMedium
 				widgets[1] = loadedMedium
-			}
+				print(loadedMedium)} else {print("Medium")}
 		}
-		
+		var large = WidgetObject(sizeName: "", width: 0, height: 0, count: 0, maxPosts: 0);
 		if let savedLarge = defaults.object(forKey: "Large") as? Data {
 			if let loadedLarge = try? decoder.decode(WidgetObject.self, from: savedLarge) {
+				large = loadedLarge
+				
 				widgets[2] = loadedLarge
-			}
+				print(loadedLarge)
+				
+			} else {print("Large")}
 		}
 		
 		
 		
-		loadData(to: &data)
-		let entry = WidgetObjectEntry(object:widgets, data:data)
+//		loadData(to: &data)
+		let entry = WidgetObjectEntry(object:[small, medium, large], data:returnLoadData())
 		let update = defaults.double(forKey: "update")
 		let nextUpdateDate = Calendar.current.date(byAdding: .minute, value: (Int(update) == 0 ? 5 : Int(update)), to: Date())!
 		let timeline = Timeline(entries: [entry], policy: .after(nextUpdateDate))
 		completion(timeline)
 	}
 	func placeholder(in context: Context) -> WidgetObjectEntry {
-		return WidgetObjectEntry(object: [WidgetObject.placeholder, WidgetObject.placeholderM, WidgetObject.placeholderL], data: data)
+		if let savedSmall = defaults.object(forKey: "Small") as? Data {
+			if let loadedSmall = try? decoder.decode(WidgetObject.self, from: savedSmall) {
+				widgets[0] = loadedSmall; print(loadedSmall)} else {print("Small")}
+		}
+		
+		if let savedMedium = defaults.object(forKey: "Medium") as? Data {
+			if let loadedMedium = try? decoder.decode(WidgetObject.self, from: savedMedium) {
+				widgets[1] = loadedMedium; print(loadedMedium)} else {print("Medium")}
+		}
+		
+		if let savedLarge = defaults.object(forKey: "Large") as? Data {
+			if let loadedLarge = try? decoder.decode(WidgetObject.self, from: savedLarge) {
+				widgets[2] = loadedLarge; print(loadedLarge)} else {print("Large")}
+		}
+		return WidgetObjectEntry(object: widgets, data: returnLoadData())
 	}
 }
 
@@ -89,7 +142,7 @@ struct WidgetEntryView: View {
 }
 
 struct PlaceholderView: View {
-	let data = [[String:String]](arrayLiteral: ["title":"title","ups":"10"],["title":"title2","ups":"20"])
+	let data = [[String:String]](arrayLiteral: ["title":"title","ups":"10", "sub":"test","author":"me"],["title":"title","ups":"10", "sub":"test","author":"me"])
 	
 	@Environment(\.widgetFamily) var family
 	var body: some View {
@@ -124,10 +177,10 @@ struct WidgitWidget: WidgetBundle {
 struct ListWidget: Widget {
 	private let kind = "ListWidget"
 	var body: some WidgetConfiguration {
-		StaticConfiguration(kind: kind, provider: Provider(), content: {
+		StaticConfiguration(kind: kind, provider: Provider()) {
 			entry in
 			WidgetEntryView(entry: entry)
-		})
+		}
 		.configurationDisplayName("Reddit Posts")
 		
 		.description("Displays Reddit posts based on customized settings within the app")
@@ -138,10 +191,10 @@ struct ListWidget: Widget {
 struct ImageWidget: Widget {
 	private let kind = "ImageWidget"
 	var body: some WidgetConfiguration {
-		StaticConfiguration(kind: kind, provider: Provider(), content: {
+		StaticConfiguration(kind: kind, provider: Provider()) {
 			entry in
-			WidgetEntryView(entry: entry)
-		})
+			WidgetEntryView(entry: WidgetObjectEntry(object: entry.object, data: [entry.data.isEmpty ?  ["sub":"r/pics","title":"Amazing costumes","ups":"35720", "author":"D0NW0N", "image": "true", "url":"https://i.redd.it/hev4kwkzuzl51.jpg"] : entry.data[0]]))
+		}
 		.configurationDisplayName("Reddit Images")
 		
 		.description("Displays the top Reddit post with an image, based on customized settings within the app")

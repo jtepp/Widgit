@@ -121,6 +121,29 @@ public func loadData(to: inout [[String:String]], limit: Int = 6) {
 	} catch {}
 }
 
+public func returnLoadData(limit: Int = 6) -> [[String:String]] {
+	let offset = defaults.integer(forKey: "offset")
+	let sub = defaults.string(forKey: "sub") ?? "all"
+	let sort = defaults.string(forKey: "sort") ?? "hot"
+	var to = [[String:String]]()
+	do {
+		var s =  "https://allpurpose.netlify.app/.netlify/functions/reddit?"
+		s = s + "sub=" + sub
+		s = s + "&sort=" + sort
+		s = s + "&limit=" + String(limit)
+		s = s + "&offset=" + String(offset)
+		print(s)
+		let url = URL(string: s)
+		let a = try String(contentsOf: url!)
+		to = convertStringToDictionary(text: String(a))
+		
+	} catch {}
+	return to
+}
+
+
+
+
 func verifySub(sub: String) -> Bool {
 	var b = false
 	do {
@@ -167,9 +190,9 @@ struct SettingsEditor: View {
 					}
 					Text("120")
 				}.padding(20)
-				Text("For best results, restart your device to enact changes")
-					.font(.callout)
-					.padding(20)
+//				Text("For best results, restart your device to enact changes")
+//					.font(.callout)
+//					.padding(20)
 			}
 				TextField("Enter subreddit", text: $subber)
 					.font(.title)

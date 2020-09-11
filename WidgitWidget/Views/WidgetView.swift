@@ -25,7 +25,16 @@ struct WidgetView: View {
 				Spacer()
 			}
 			
-		}}
+		}
+//		.onAppear{
+//			let n = object.sizeName
+//			let decoder = JSONDecoder()
+//			if let savedw = defaults.object(forKey: n) as? Data {
+//				if let loadedw = try? decoder.decode(WidgetObject.self, from: savedw) {
+//					object = loadedw; print(object)} else {print(n)}
+//			}
+//		}
+		}
 		
 		
 	}
@@ -54,21 +63,27 @@ struct SingleImageView: View {
 				RoundedRectangle(cornerRadius: 5)
 					.fill(Color.black.opacity(0.6))
 			)
-			.padding(.horizontal,family != .systemMedium ? 25 : 5)
+//			.padding(.horizontal,family != .systemMedium ? 25 : 5)
+			.padding(.horizontal, 10)
 		}}
 }
 
 struct listView: View {
 	var object: WidgetObject
 	var data: [[String:String]]
+	let pad: CGFloat = 5
 	var body: some View {
-		HStack{
+		HStack(alignment:.center){
 			VStack {
 				ForEach(1..<Int(object.count + 1)) { i in
 					if data.count > i {
 						votesView(data: data[i])
-							.padding(.vertical,20)
+							.padding(.vertical,pad)
+							.padding(.top, i == 1 ? pad : 0)
+//							.onAppear{
+//						print(String(i) + "list" + object.sizeName)}
 					}
+					
 					
 				}
 			}
@@ -76,7 +91,8 @@ struct listView: View {
 				ForEach(1..<Int(object.count + 1)) { i in
 					if data.count > i {
 					infoView(data: data[i])
-						.padding(.vertical,20)
+						.padding(.top, i == 1 ? pad : 0)
+						.padding(.vertical,pad)
 					}
 				}
 				
@@ -114,6 +130,8 @@ struct infoView: View {
 				.font(.subheadline)
 				.bold()
 				.foregroundColor(Color("silver"))
+				.minimumScaleFactor(0.6)
+				.lineLimit(1)
 			Text(data["title"]!)
 				.font(.headline)
 				.lineLimit(2)
@@ -122,6 +140,8 @@ struct infoView: View {
 				.foregroundColor(Color("silver"))
 				.font(.footnote)
 				.bold()
+				.minimumScaleFactor(0.6)
+				.lineLimit(1)
 		}.foregroundColor(.white)
 	}
 }
