@@ -23,9 +23,8 @@ struct Provider: TimelineProvider {
 		completion(entry)
 	}
 	func timeline(with context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
-		var sub = defaults.string(forKey: "sub") ?? "all"
 		var data = [[String:String]]()
-		loadData(to: &data, sub: "pics")
+		loadData(to: &data)
 		let entry = WidgetObjectEntry(object:widgets, data:data)
 		let nextUpdateDate = Calendar.current.date(byAdding: .minute, value: 15, to: Date())!
 		let timeline = Timeline(entries: [entry], policy: .after(nextUpdateDate))

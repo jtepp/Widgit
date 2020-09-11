@@ -15,6 +15,10 @@ struct ContentView: View {
 		NavigationView {
 			ScrollView {
 				//				ForEach(widgets) { w in
+				NavigationLink(
+					destination: SubredditSettingsEditor()){
+					Text("Subreddit Settings")
+				}
 				WidgetObjectLink(object: $widgets[0])
 				WidgetObjectLink(object: $widgets[1])
 				WidgetObjectLink(object: $widgets[2])
@@ -27,7 +31,7 @@ struct ContentView: View {
 			.navigationTitle("Home")
 		}
 		.onAppear(){
-			loadData(to: &data, sub: "clashroyale")
+//			loadData(to: &data, sub: "clashroyale")
 			let decoder = JSONDecoder()
 			if let savedSmall = defaults.object(forKey: "Small") as? Data {
 				if let loadedSmall = try? decoder.decode(WidgetObject.self, from: savedSmall) {
@@ -71,15 +75,40 @@ func convertStringToDictionary(text: String) -> [[String:String]] {
 	return [[String:String]]()
 }
 
-public func loadData(to: inout [[String:String]], sub: String, sort: String = "hot", limit: Int = 2) {
+public func loadData(to: inout [[String:String]], limit: Int = 2, firstImg: Bool = false, offset: Int = 0) {
+	let sub = defaults.string(forKey: "sub") ?? "all"
+	let sort = defaults.string(forKey: "sort") ?? "hot"
 	do {
 		var s =  "https://allpurpose.netlify.app/.netlify/functions/reddit?"
 		s = s + "sub=" + sub
 		s = s + "&sort=" + sort
 		s = s + "&limit=" + String(limit + 1)
+		s = s + "&offset=" + String(offset)
+		s = s + "&firstImg=" + String(firstImg)
 		let url = URL(string: s)
 		let a = try String(contentsOf: url!)
 		to = convertStringToDictionary(text: String(a))
 		
 	} catch {}
+}
+
+func verifySub(sub: String) -> Bool {
+	var b = false
+	do {
+		
+		var s =  "https://allpurpose.netlify.app/.netlify/functions/reddit?verify=true&"
+		s = s + "sub=" + sub
+		let url = URL(string: s)
+		let a = try String(contentsOf: url!)
+		b = Bool(a) ?? false
+		
+	} catch {}
+	return b
+}
+
+
+struct SubredditSettingsEditor: View {
+	var body: some View {
+		Text("here")
+	}
 }
