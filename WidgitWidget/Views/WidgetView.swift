@@ -13,19 +13,19 @@ struct WidgetView: View {
 	let data: [[String:String]]
 	var body: some View {
 		
-		ZStack
+		if data.count == 1 {
+			SingleImageView(object: object, data: data[0])
+		} else {ZStack
 		{LinearGradient(gradient: Gradient(colors: [Color("start"), Color("end")]), startPoint: .topLeading, endPoint: .bottomTrailing)
 			VStack {
 				Spacer()
-				if data.count == 1 {
-					SingleImageView(object: object, data: data[0])
-				} else {
+				
 					listView(object: object, data: data)
-				}
+				
 				Spacer()
 			}
 			
-		}
+		}}
 		
 		
 	}
@@ -35,6 +35,7 @@ struct WidgetView: View {
 struct SingleImageView: View {
 	var object: WidgetObject
 	var data: [String:String]
+	@Environment(\.widgetFamily) var family
 	var body: some View {
 		ZStack{
 			imgFromUrl(url: data["url"]!)
@@ -53,6 +54,7 @@ struct SingleImageView: View {
 				RoundedRectangle(cornerRadius: 5)
 					.fill(Color.black.opacity(0.6))
 			)
+			.padding(.horizontal,family != .systemMedium ? 25 : 5)
 		}}
 }
 
