@@ -62,7 +62,7 @@ struct listView: View {
 	var body: some View {
 		HStack{
 			VStack {
-				ForEach(0..<Int(object.count)) { i in
+				ForEach(1..<Int(object.count + 1)) { i in
 					if data.count > i {
 						votesView(data: data[i])
 							.padding(.vertical,20)

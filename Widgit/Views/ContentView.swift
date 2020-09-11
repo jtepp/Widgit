@@ -101,7 +101,7 @@ func convertStringToDictionary(text: String) -> [[String:String]] {
 	return [[String:String]]()
 }
 
-public func loadData(to: inout [[String:String]], limit: Int = 1, firstImg: Bool = false) {
+public func loadData(to: inout [[String:String]], limit: Int = 6) {
 	let offset = defaults.integer(forKey: "offset")
 	let sub = defaults.string(forKey: "sub") ?? "all"
 	let sort = defaults.string(forKey: "sort") ?? "hot"
@@ -111,7 +111,6 @@ public func loadData(to: inout [[String:String]], limit: Int = 1, firstImg: Bool
 		s = s + "&sort=" + sort
 		s = s + "&limit=" + String(limit)
 		s = s + "&offset=" + String(offset)
-		s = s + "&firstImg=" + String(firstImg)
 		let url = URL(string: s)
 		let a = try String(contentsOf: url!)
 		to = convertStringToDictionary(text: String(a))
