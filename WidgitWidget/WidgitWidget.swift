@@ -48,8 +48,8 @@ struct Provider: TimelineProvider {
 			}
 		}
 		
-		
 		var data = [[String:String]]()
+		
 		loadData(to: &data)
 		let entry = WidgetObjectEntry(object:widgets, data:data)
 		let update = defaults.double(forKey: "update")
@@ -59,46 +59,6 @@ struct Provider: TimelineProvider {
 	}
 }
 
-struct ImageProvider: TimelineProvider {
-	typealias Entry = WidgetObjectEntry
-	@State var widgets = [WidgetObject.placeholder,WidgetObject.placeholderM,WidgetObject.placeholderL]
-	
-	let decoder = JSONDecoder()
-	
-	func snapshot(with context: Context, completion: @escaping (Entry) -> ()) {
-		let entry = WidgetObjectEntry(object: [WidgetObject.placeholder, WidgetObject.placeholderM, WidgetObject.placeholderL], data:[[String:String]]())
-		completion(entry)
-	}
-	func timeline(with context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
-		
-		if let savedSmall = defaults.object(forKey: "Small") as? Data {
-			if let loadedSmall = try? decoder.decode(WidgetObject.self, from: savedSmall) {
-				widgets[0] = loadedSmall
-			}
-		}
-		
-		if let savedMedium = defaults.object(forKey: "Medium") as? Data {
-			if let loadedMedium = try? decoder.decode(WidgetObject.self, from: savedMedium) {
-				widgets[1] = loadedMedium
-			}
-		}
-		
-		if let savedLarge = defaults.object(forKey: "Large") as? Data {
-			if let loadedLarge = try? decoder.decode(WidgetObject.self, from: savedLarge) {
-				widgets[2] = loadedLarge
-			}
-		}
-		
-		
-		var data = [[String:String]]()
-		loadData(to: &data)
-		let entry = WidgetObjectEntry(object:widgets, data:[data[0]])
-		let update = defaults.double(forKey: "update")
-		let nextUpdateDate = Calendar.current.date(byAdding: .minute, value: (Int(update) == 0 ? 5 : Int(update)), to: Date())!
-		let timeline = Timeline(entries: [entry], policy: .after(nextUpdateDate))
-		completion(timeline)
-	}
-}
 
 
 struct WidgetEntryView: View {
@@ -171,9 +131,9 @@ struct ListWidget: Widget {
 struct ImageWidget: Widget {
 	private let kind = "ImageWidget"
 	var body: some WidgetConfiguration {
-		StaticConfiguration(kind: kind, provider: ImageProvider(), placeholder: PlaceholderView()) {
+		StaticConfiguration(kind: kind, provider: Provider(), placeholder: PlaceholderView()) {
 			entry in
-			WidgetEntryView(entry: entry)
+			WidgetEntryView(entry: Provider.Entry(object: entry.object, data: [entry.data[0]]))
 		}
 		.configurationDisplayName("Reddit Images")
 		

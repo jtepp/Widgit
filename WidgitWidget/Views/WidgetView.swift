@@ -127,7 +127,7 @@ struct infoView: View {
 struct SmallWidgetView_Previews: PreviewProvider {
 	static var previews: some View {
 		Group {
-			WidgetView(object: WidgetObject(sizeName: "Small", width: 100, height: 100, count: 1, singleImage: true, maxPosts:2), data: [[String:String]](arrayLiteral: ["sub":"r/pics","title":"Amazing costumes","ups":"35720", "author":"D0NW0N", "image": "true", "url":"https://i.redd.it/hev4kwkzuzl51.jpg"],["sub":"r/ClashRoyale","title":"Something","ups":"3520", "author":"D0NW0N", "image": "false", "url":""]))
+			WidgetView(object: WidgetObject(sizeName: "Small", width: 100, height: 100, count: 1, maxPosts:2), data: [[String:String]](arrayLiteral: ["sub":"r/pics","title":"Amazing costumes","ups":"35720", "author":"D0NW0N", "image": "true", "url":"https://i.redd.it/hev4kwkzuzl51.jpg"],["sub":"r/ClashRoyale","title":"Something","ups":"3520", "author":"D0NW0N", "image": "false", "url":""]))
 				.previewContext(WidgetPreviewContext(family: .systemSmall))
 			WidgetView(object: WidgetObject(sizeName: "Small", width: 100, height: 100, count: 1, maxPosts:2), data: [[String:String]](arrayLiteral: ["sub":"r/pics","title":"Amazing costumes","ups":"35720", "author":"D0NW0N", "image": "true", "url":"https://i.redd.it/hev4kwkzuzl51.jpg"],["sub":"r/ClashRoyale","title":"Something","ups":"3520", "author":"D0NW0N", "image": "false", "url":""]))
 				.previewContext(WidgetPreviewContext(family: .systemSmall))
