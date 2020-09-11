@@ -10,6 +10,7 @@ import SwiftUI
 struct WidgetObjectLink: View {
 	@Binding var object: WidgetObject
 	var body: some View {
+		
 		NavigationLink(destination: WidgetObjectEditor(object: $object)) {
 			VStack {
 				HStack() {
