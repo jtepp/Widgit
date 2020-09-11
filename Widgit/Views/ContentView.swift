@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import WidgetKit
+
 var defaults = UserDefaults.init(suiteName: "group.com.jtepp.Widgit")!
 struct ContentView: View {
 	@State var widgets = [WidgetObject.placeholder, WidgetObject.placeholderM, WidgetObject.placeholderL]
@@ -131,6 +133,9 @@ func verifySub(sub: String) -> Bool {
 		b = Bool(a) ?? false
 		
 	} catch {}
+	if b {
+		WidgetCenter.shared.reloadAllTimelines()
+	}
 	return b
 }
 
@@ -158,6 +163,7 @@ struct SettingsEditor: View {
 					Text("5")
 					Slider(value: $update, in: 5...120, step: 1.0) { _ in
 						defaults.setValue(Double(update), forKey: "update")
+						WidgetCenter.shared.reloadAllTimelines()
 					}
 					Text("120")
 				}.padding(20)
@@ -201,7 +207,7 @@ struct SettingsEditor: View {
 					.bold()
 					.padding(20)
 			}
-			Picker(selection: $sortValue, label: Text("Sort"), content: /*@START_MENU_TOKEN@*/{
+			Picker(selection: $sortValue, label: Text("Sort"), content: {
 				Text("Hot").tag("hot")
 				Text("New").tag("new")
 				Text("Rising").tag("rising")
@@ -211,9 +217,10 @@ struct SettingsEditor: View {
 				Text("Top [This month]").tag("top!t=month")
 				Text("Top [This week]").tag("top!t=week")
 				Text("Top [Today]").tag("top!t=day")
-			}/*@END_MENU_TOKEN@*/)
+			})
 			.onChange(of: sortValue, perform: { value in
 				defaults.setValue(sortValue, forKey: "sort")
+				WidgetCenter.shared.reloadAllTimelines()
 			})
 			
 			
@@ -232,12 +239,13 @@ struct SettingsEditor: View {
 					
 					Text("Current offset: ")
 						.padding(20)
-					TextField("Enter offset", text: $newOffsetString, onEditingChanged: { (Bool) in
+					TextField("Enter offset", text: $newOffsetString, onEditingChanged: { _ in
 						let filtered = newOffsetString.filter{ "0123456789".contains($0)}
 							if filtered != newOffsetString {
 								newOffsetString = filtered
 							
 							newOffset = Int(newOffsetString)!
+								WidgetCenter.shared.reloadAllTimelines()
 								
 						}
 					})
@@ -250,6 +258,7 @@ struct SettingsEditor: View {
 			Button(action: {
 				newOffset = Int(newOffsetString)!
 				defaults.setValue(newOffset, forKey: "offset")
+				WidgetCenter.shared.reloadAllTimelines()
 			}, label: {
 				Text("Set offset")
 			})

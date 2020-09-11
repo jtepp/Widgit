@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import WidgetKit
 
 struct WidgetObjectLink: View {
 	@Binding var object: WidgetObject
@@ -85,6 +86,7 @@ struct WidgetObjectEditor: View {
 							Text("1")
 							Slider(value: $object.count, in: 1...object.maxPosts, step: 1.0) { _ in
 								do {try defaults.setValue(encoder.encode(object), forKey: object.sizeName)} catch {print("false")}
+								WidgetCenter.shared.reloadAllTimelines()
 							}
 							Text(String(Int(object.maxPosts)))
 						}
