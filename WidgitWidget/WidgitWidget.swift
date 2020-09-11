@@ -15,20 +15,24 @@ struct WidgetObjectEntry: TimelineEntry {
 }
 
 struct Provider: TimelineProvider {
+	
+	
+	
+	
 	typealias Entry = WidgetObjectEntry
 	@State var widgets = [WidgetObject.placeholder,WidgetObject.placeholderM,WidgetObject.placeholderL]
-	
+	@State var data = [[String:String]]()
 	let decoder = JSONDecoder()
 	
 	
 	
 	
 	
-	func snapshot(with context: Context, completion: @escaping (Entry) -> ()) {
+	func getSnapshot(in context: Context, completion: @escaping (Entry) -> ()) {
 		let entry = WidgetObjectEntry(object: [WidgetObject.placeholder, WidgetObject.placeholderM, WidgetObject.placeholderL], data:[[String:String]]())
 		completion(entry)
 	}
-	func timeline(with context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
+	func getTimeline(in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
 		
 		if let savedSmall = defaults.object(forKey: "Small") as? Data {
 			if let loadedSmall = try? decoder.decode(WidgetObject.self, from: savedSmall) {
@@ -48,7 +52,7 @@ struct Provider: TimelineProvider {
 			}
 		}
 		
-		var data = [[String:String]]()
+		
 		
 		loadData(to: &data)
 		let entry = WidgetObjectEntry(object:widgets, data:data)
@@ -56,6 +60,9 @@ struct Provider: TimelineProvider {
 		let nextUpdateDate = Calendar.current.date(byAdding: .minute, value: (Int(update) == 0 ? 5 : Int(update)), to: Date())!
 		let timeline = Timeline(entries: [entry], policy: .after(nextUpdateDate))
 		completion(timeline)
+	}
+	func placeholder(in context: Context) -> WidgetObjectEntry {
+		return WidgetObjectEntry(object: [WidgetObject.placeholder, WidgetObject.placeholderM, WidgetObject.placeholderL], data: data)
 	}
 }
 
@@ -117,10 +124,10 @@ struct WidgitWidget: WidgetBundle {
 struct ListWidget: Widget {
 	private let kind = "ListWidget"
 	var body: some WidgetConfiguration {
-		StaticConfiguration(kind: kind, provider: Provider(), placeholder: PlaceholderView()) {
+		StaticConfiguration(kind: kind, provider: Provider(), content: {
 			entry in
 			WidgetEntryView(entry: entry)
-		}
+		})
 		.configurationDisplayName("Reddit Posts")
 		
 		.description("Displays Reddit posts based on customized settings within the app")
@@ -131,10 +138,10 @@ struct ListWidget: Widget {
 struct ImageWidget: Widget {
 	private let kind = "ImageWidget"
 	var body: some WidgetConfiguration {
-		StaticConfiguration(kind: kind, provider: Provider(), placeholder: PlaceholderView()) {
+		StaticConfiguration(kind: kind, provider: Provider(), content: {
 			entry in
-			WidgetEntryView(entry: Provider.Entry(object: entry.object, data: [entry.data[0]]))
-		}
+			WidgetEntryView(entry: entry)
+		})
 		.configurationDisplayName("Reddit Images")
 		
 		.description("Displays the top Reddit post with an image, based on customized settings within the app")
