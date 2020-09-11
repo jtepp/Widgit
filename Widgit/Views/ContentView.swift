@@ -165,7 +165,7 @@ struct SubredditSettingsEditor: View {
 				RoundedRectangle(cornerRadius: 5)
 					.fill(Color("end"))
 			)
-			Text("Current subreddit: r/" + realSub)
+			Text("Current subreddit: r/" + realSub.lowercased())
 				.padding(20)
 			if showBad {
 			Text("Invalid subreddit")
