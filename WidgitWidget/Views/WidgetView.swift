@@ -17,7 +17,7 @@ struct WidgetView: View {
 		{LinearGradient(gradient: Gradient(colors: [Color("start"), Color("end")]), startPoint: .topLeading, endPoint: .bottomTrailing)
 			VStack {
 				Spacer()
-				if object.singleImage {
+				if data.count == 1 {
 					SingleImageView(object: object, data: data[0])
 				} else {
 					listView(object: object, data: data)
@@ -71,7 +71,7 @@ struct listView: View {
 				}
 			}
 			VStack(alignment:.leading) {
-				ForEach(0..<Int(object.count)) { i in
+				ForEach(1..<Int(object.count + 1)) { i in
 					if data.count > i {
 					infoView(data: data[i])
 						.padding(.vertical,20)

@@ -60,22 +60,22 @@ struct WidgetObjectEditor: View {
 			ScrollView {
 				
 				VStack {
-				HStack {
-					Text("Show first image (full widget)")
-						.bold()
-						.multilineTextAlignment(/*@START_MENU_TOKEN@*/.leading/*@END_MENU_TOKEN@*/)
-						.frame(minWidth:UIScreen.main.bounds.width*3/4)
-						
-					Toggle("", isOn: $object.singleImage)
-						.onChange(of: object.singleImage, perform: { _ in
-							do {try defaults.setValue(encoder.encode(object), forKey: object.sizeName)} catch {print("false")}
-							
-							
-						})
-				}
-				.padding(20)
+//				HStack {
+//					Text("Show first image (full widget)")
+//						.bold()
+//						.multilineTextAlignment(/*@START_MENU_TOKEN@*/.leading/*@END_MENU_TOKEN@*/)
+//						.frame(minWidth:UIScreen.main.bounds.width*3/4)
+//
+//					Toggle("", isOn: $object.singleImage)
+//						.onChange(of: object.singleImage, perform: { _ in
+//							do {try defaults.setValue(encoder.encode(object), forKey: object.sizeName)} catch {print("false")}
+//
+//
+//						})
+//				}
+//				.padding(20)
 					
-				if !object.singleImage {
+				
 					Divider()
 						.background(Color.white)
 					VStack {
@@ -90,12 +90,12 @@ struct WidgetObjectEditor: View {
 						}
 					}
 					.padding(20)
-				}
+				
 			
 				}
 				Spacer()
 			}
-			.foregroundColor(.white)
+			.foregroundColor(Color("blackwhite"))
 			.navigationTitle(object.sizeName + " widget")
 		}
 	}

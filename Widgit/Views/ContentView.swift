@@ -25,7 +25,6 @@ struct ContentView: View {
 							Spacer()
 							Spacer()
 							Text("Customize settings")
-								.foregroundColor(Color("blackwhite"))
 								.font(.title)
 								.bold()
 							Spacer()
@@ -34,7 +33,7 @@ struct ContentView: View {
 						}
 						Spacer()
 					}
-					.foregroundColor(.white)
+					.foregroundColor(Color("blackwhite"))
 					.background(
 						RoundedRectangle(cornerRadius: 10)
 							.fill(
@@ -76,6 +75,7 @@ struct ContentView: View {
 				}
 			}
 //			print(data)
+			print(widgets)
 		}
 	}
 }
@@ -111,6 +111,7 @@ public func loadData(to: inout [[String:String]], limit: Int = 6) {
 		s = s + "&sort=" + sort
 		s = s + "&limit=" + String(limit)
 		s = s + "&offset=" + String(offset)
+		print(s)
 		let url = URL(string: s)
 		let a = try String(contentsOf: url!)
 		to = convertStringToDictionary(text: String(a))
@@ -149,7 +150,7 @@ struct SettingsEditor: View {
 				.edgesIgnoringSafeArea(.all)
 		ScrollView {
 			VStack{
-				Text("Set refresh time: " + String(Int(update)) + " minutes")
+				Text("Set refresh time: " + String(Int(update) == 0 ? 5 : Int(update)) + " minutes")
 					.font(.title3)
 					.bold()
 					.padding(.top,20)
@@ -271,6 +272,7 @@ struct SettingsEditor: View {
 			newOffset = defaults.integer(forKey: "offset")
 			newOffsetString = String(defaults.integer(forKey: "offset"))
 			sortValue = defaults.string(forKey: "sort") ?? "hot"
+			
 		}
 	}
 	

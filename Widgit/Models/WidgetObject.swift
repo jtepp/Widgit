@@ -16,7 +16,7 @@ struct WidgetObject: Identifiable, Codable {
 	var width: CGFloat
 	var height: CGFloat
 	var count: Double
-	var singleImage: Bool = false;
+//	var singleImage: Bool = false;
 	var maxPosts: Double
 	static let placeholder = WidgetObject(sizeName: "Small", width: 100, height: 100, count: 1, maxPosts: 2)
 	static let placeholderM = WidgetObject(sizeName: "Medium", width: 250, height: 100, count: 2, maxPosts: 3)
