@@ -161,6 +161,9 @@ struct SettingsEditor: View {
 					}
 					Text("120")
 				}.padding(20)
+				Text("For best results, restart your device to enact changes")
+					.font(.callout)
+					.padding(20)
 			}
 				TextField("Enter subreddit", text: $subber)
 					.font(.title)
