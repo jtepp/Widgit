@@ -17,14 +17,15 @@ struct ContentView: View {
 			ScrollView {
 				//				ForEach(widgets) { w in
 				NavigationLink(
-					destination: SubredditSettingsEditor(realSub: $realSub)){
+					destination: SettingsEditor(realSub: $realSub)){
 					VStack {
 						Spacer()
 						HStack {
 							Spacer()
 							Spacer()
 							Spacer()
-							Text("Subreddit settings")
+							Text("Customize settings")
+								.foregroundColor(Color("blackwhite"))
 								.font(.title)
 								.bold()
 							Spacer()
@@ -53,7 +54,7 @@ struct ContentView: View {
 			)
 			.navigationTitle("Home")
 		}
-		.accentColor(.white)
+		.accentColor(Color("blackwhite"))
 		.onAppear(){
 //			loadData(to: &data, sub: "clashroyale")
 			let decoder = JSONDecoder()
@@ -100,7 +101,7 @@ func convertStringToDictionary(text: String) -> [[String:String]] {
 	return [[String:String]]()
 }
 
-public func loadData(to: inout [[String:String]], limit: Int = 2, firstImg: Bool = false) {
+public func loadData(to: inout [[String:String]], limit: Int = 1, firstImg: Bool = false) {
 	let offset = defaults.integer(forKey: "offset")
 	let sub = defaults.string(forKey: "sub") ?? "all"
 	let sort = defaults.string(forKey: "sort") ?? "hot"
@@ -108,7 +109,7 @@ public func loadData(to: inout [[String:String]], limit: Int = 2, firstImg: Bool
 		var s =  "https://allpurpose.netlify.app/.netlify/functions/reddit?"
 		s = s + "sub=" + sub
 		s = s + "&sort=" + sort
-		s = s + "&limit=" + String(limit + 1)
+		s = s + "&limit=" + String(limit)
 		s = s + "&offset=" + String(offset)
 		s = s + "&firstImg=" + String(firstImg)
 		let url = URL(string: s)
@@ -134,16 +135,33 @@ func verifySub(sub: String) -> Bool {
 }
 
 
-struct SubredditSettingsEditor: View {
+struct SettingsEditor: View {
 	@Binding var realSub: String
 	@State var subber:String = ""
 	@State var verification: Bool = false
 	@State var showBad = false
+	@State var newOffset = defaults.integer(forKey: "offset")
+	@State var newOffsetString = String(defaults.integer(forKey: "offset"))
+	@State var sortValue = defaults.string(forKey: "sort") ?? "hot"
+	@State var update = defaults.double(forKey: "update")
 	var body: some View {
 		ZStack {
 			LinearGradient(gradient: Gradient(colors: [Color("start"), Color("end")]), startPoint: .topLeading, endPoint: .bottomTrailing)
 				.edgesIgnoringSafeArea(.all)
-		VStack {
+		ScrollView {
+			VStack{
+				Text("Set refresh time: " + String(Int(update)) + " minutes")
+					.font(.title3)
+					.bold()
+					.padding(.top,20)
+				HStack{
+					Text("5")
+					Slider(value: $update, in: 5...120, step: 1.0) { _ in
+						defaults.setValue(Double(update), forKey: "update")
+					}
+					Text("120")
+				}.padding(20)
+			}
 				TextField("Enter subreddit", text: $subber)
 					.font(.title)
 					.padding(20)
@@ -171,11 +189,90 @@ struct SubredditSettingsEditor: View {
 			Text("Invalid subreddit")
 				.padding(20)
 			}
-			Spacer()
+			
+			VStack {
+				Divider()
+					.background(Color.white)
+				Text("Sort posts by:")
+					.font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
+					.bold()
+					.padding(20)
+			}
+			Picker(selection: $sortValue, label: Text("Sort"), content: /*@START_MENU_TOKEN@*/{
+				Text("Hot").tag("hot")
+				Text("New").tag("new")
+				Text("Rising").tag("rising")
+				Text("Controversial").tag("controversial")
+				Text("Top [All time]").tag("top!t=all")
+				Text("Top [This year]").tag("top!t=year")
+				Text("Top [This month]").tag("top!t=month")
+				Text("Top [This week]").tag("top!t=week")
+				Text("Top [Today]").tag("top!t=day")
+			}/*@END_MENU_TOKEN@*/)
+			.onChange(of: sortValue, perform: { value in
+				defaults.setValue(sortValue, forKey: "sort")
+			})
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			VStack {
+				Divider()
+					.background(Color.white)
+				HStack {
+					
+					Text("Current offset: ")
+						.padding(20)
+					TextField("Enter offset", text: $newOffsetString, onEditingChanged: { (Bool) in
+						let filtered = newOffsetString.filter{ "0123456789".contains($0)}
+							if filtered != newOffsetString {
+								newOffsetString = filtered
+							
+							newOffset = Int(newOffsetString)!
+								
+						}
+					})
+						.font(.title3)
+						.padding(20)
+					.keyboardType(.numberPad)
+					Spacer()
+				}
+			}
+			Button(action: {
+				newOffset = Int(newOffsetString)!
+				defaults.setValue(newOffset, forKey: "offset")
+			}, label: {
+				Text("Set offset")
+			})
+			.foregroundColor(.white)
+			.padding(8)
+			.background(
+				RoundedRectangle(cornerRadius: 5)
+					.fill(Color("end"))
+			)
+			Text("Use an offset if your subreddit has a constant number of pinned or moderator posts that arent filtered out by the Widgit API")
+				.multilineTextAlignment(.center)
+				.lineLimit(4)
+				.padding(20)
+				.font(.callout)
+			
+//			Spacer()
 		}
-		.navigationTitle("Subreddit settings")
+		.navigationTitle("Customize settings")
 		
 			}
+		.onAppear(){
+			update = defaults.double(forKey: "update")
+			newOffset = defaults.integer(forKey: "offset")
+			newOffsetString = String(defaults.integer(forKey: "offset"))
+			sortValue = defaults.string(forKey: "sort") ?? "hot"
+		}
 	}
 	
 }

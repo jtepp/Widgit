@@ -14,7 +14,7 @@ struct WidgetView: View {
 	var body: some View {
 		
 		ZStack
-			{LinearGradient(gradient: Gradient(colors: [Color("start"), Color("end")]), startPoint: .topLeading, endPoint: .bottomTrailing)
+		{LinearGradient(gradient: Gradient(colors: [Color("start"), Color("end")]), startPoint: .topLeading, endPoint: .bottomTrailing)
 			VStack {
 				Spacer()
 				if object.singleImage {
@@ -40,20 +40,20 @@ struct SingleImageView: View {
 			imgFromUrl(url: data["url"]!)
 				.resizable()
 				.aspectRatio(contentMode: .fill)
-		HStack {
-			VStack(alignment:.center) {
-				votesView(data: data)
+			HStack {
+				VStack(alignment:.center) {
+					votesView(data: data)
+				}
+				
+				infoView(data: data)
+				
 			}
-			
-			infoView(data: data)
-
-		}
-		.foregroundColor(.white)
-		.background(
-		RoundedRectangle(cornerRadius: 5)
-			.fill(Color.black.opacity(0.6))
-		)
-	}}
+			.foregroundColor(.white)
+			.background(
+				RoundedRectangle(cornerRadius: 5)
+					.fill(Color.black.opacity(0.6))
+			)
+		}}
 }
 
 struct listView: View {
@@ -63,14 +63,19 @@ struct listView: View {
 		HStack{
 			VStack {
 				ForEach(0..<Int(object.count)) { i in
-				votesView(data: data[i])
-					.padding(.vertical,20)
+					if data.count > i {
+						votesView(data: data[i])
+							.padding(.vertical,20)
+					}
+					
 				}
 			}
 			VStack(alignment:.leading) {
 				ForEach(0..<Int(object.count)) { i in
+					if data.count > i {
 					infoView(data: data[i])
 						.padding(.vertical,20)
+					}
 				}
 				
 			}
@@ -85,17 +90,17 @@ struct listView: View {
 struct votesView: View {
 	var data: [String:String]
 	var body: some View {
-			VStack {
-				Image(systemName: "arrow.up.square.fill")
-					.foregroundColor(.red)
-				Text(shortNumber(num:data["ups"]!))
-					.font(.subheadline)
-					.bold()
-				Image(systemName: "arrow.down.square.fill")
-					.foregroundColor(.red)
-			}
-			.foregroundColor(.white)
-			.padding(.horizontal, 4)
+		VStack {
+			Image(systemName: "arrow.up.square.fill")
+				.foregroundColor(.red)
+			Text(shortNumber(num:data["ups"]!))
+				.font(.subheadline)
+				.bold()
+			Image(systemName: "arrow.down.square.fill")
+				.foregroundColor(.red)
+		}
+		.foregroundColor(.white)
+		.padding(.horizontal, 4)
 	}
 }
 

@@ -15,11 +15,11 @@
 		0C03A4E12505EC6B0053EE3F /* WidgitWidget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 0C03A4DC2505EC620053EE3F /* WidgitWidget.intentdefinition */; };
 		0C03A4E42505EC6B0053EE3F /* WidgitWidgetExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 0C03A4D32505EC620053EE3F /* WidgitWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		0C03A4E92505ED740053EE3F /* WidgetObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C1002C825055B3A007BCAC0 /* WidgetObject.swift */; };
-		0C03A4ED2505F2A90053EE3F /* SmallWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C03A4EC2505F2A90053EE3F /* SmallWidgetView.swift */; };
+		0C03A4ED2505F2A90053EE3F /* WidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C03A4EC2505F2A90053EE3F /* WidgetView.swift */; };
 		0C03A4EF2505F2B60053EE3F /* MediumWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C03A4EE2505F2B60053EE3F /* MediumWidgetView.swift */; };
 		0C03A4F12505F2BE0053EE3F /* LargeWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C03A4F02505F2BE0053EE3F /* LargeWidgetView.swift */; };
 		0C03A4F22505F3380053EE3F /* WidgetObjectViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CBBC2A325054A9B006DC736 /* WidgetObjectViews.swift */; };
-		0C03A4F32505F42F0053EE3F /* SmallWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C03A4EC2505F2A90053EE3F /* SmallWidgetView.swift */; };
+		0C03A4F32505F42F0053EE3F /* WidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C03A4EC2505F2A90053EE3F /* WidgetView.swift */; };
 		0C03A4F42505F4320053EE3F /* MediumWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C03A4EE2505F2B60053EE3F /* MediumWidgetView.swift */; };
 		0C03A4F52505F4350053EE3F /* LargeWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C03A4F02505F2BE0053EE3F /* LargeWidgetView.swift */; };
 		0C1002C925055B3A007BCAC0 /* WidgetObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C1002C825055B3A007BCAC0 /* WidgetObject.swift */; };
@@ -80,7 +80,7 @@
 		0C03A4DD2505EC6B0053EE3F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0C03A4DF2505EC6B0053EE3F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0C03A4EA2505EFAC0053EE3F /* WidgitWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WidgitWidgetExtension.entitlements; sourceTree = "<group>"; };
-		0C03A4EC2505F2A90053EE3F /* SmallWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallWidgetView.swift; sourceTree = "<group>"; };
+		0C03A4EC2505F2A90053EE3F /* WidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetView.swift; sourceTree = "<group>"; };
 		0C03A4EE2505F2B60053EE3F /* MediumWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediumWidgetView.swift; sourceTree = "<group>"; };
 		0C03A4F02505F2BE0053EE3F /* LargeWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LargeWidgetView.swift; sourceTree = "<group>"; };
 		0C1002C825055B3A007BCAC0 /* WidgetObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetObject.swift; sourceTree = "<group>"; };
@@ -164,7 +164,7 @@
 		0C03A4EB2505F29B0053EE3F /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				0C03A4EC2505F2A90053EE3F /* SmallWidgetView.swift */,
+				0C03A4EC2505F2A90053EE3F /* WidgetView.swift */,
 				0C03A4EE2505F2B60053EE3F /* MediumWidgetView.swift */,
 				0C03A4F02505F2BE0053EE3F /* LargeWidgetView.swift */,
 			);
@@ -418,7 +418,7 @@
 				0C03A4DB2505EC620053EE3F /* WidgitWidget.swift in Sources */,
 				0C03A4F52505F4350053EE3F /* LargeWidgetView.swift in Sources */,
 				0C03A4F42505F4320053EE3F /* MediumWidgetView.swift in Sources */,
-				0C03A4F32505F42F0053EE3F /* SmallWidgetView.swift in Sources */,
+				0C03A4F32505F42F0053EE3F /* WidgetView.swift in Sources */,
 				0C03A4F22505F3380053EE3F /* WidgetObjectViews.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -433,7 +433,7 @@
 				0C03A4EF2505F2B60053EE3F /* MediumWidgetView.swift in Sources */,
 				0CBBC27925054927006DC736 /* ContentView.swift in Sources */,
 				0CBBC2A425054A9B006DC736 /* WidgetObjectViews.swift in Sources */,
-				0C03A4ED2505F2A90053EE3F /* SmallWidgetView.swift in Sources */,
+				0C03A4ED2505F2A90053EE3F /* WidgetView.swift in Sources */,
 				0CBBC27725054927006DC736 /* WidgitApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

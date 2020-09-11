@@ -52,14 +52,57 @@ struct WidgetObjectLink: View {
 
 struct WidgetObjectEditor: View {
 	@Binding var object: WidgetObject
-	
+	let encoder = JSONEncoder()
 	var body: some View {
-		Text("Hello")
+		ZStack {
+			LinearGradient(gradient: Gradient(colors: [Color("start"), Color("end")]), startPoint: .topLeading, endPoint: .bottomTrailing)
+				.edgesIgnoringSafeArea(.all)
+			ScrollView {
+				
+				VStack {
+				HStack {
+					Text("Show first image (full widget)")
+						.bold()
+						.multilineTextAlignment(/*@START_MENU_TOKEN@*/.leading/*@END_MENU_TOKEN@*/)
+						.frame(minWidth:UIScreen.main.bounds.width*3/4)
+						
+					Toggle("", isOn: $object.singleImage)
+						.onChange(of: object.singleImage, perform: { _ in
+							do {try defaults.setValue(encoder.encode(object), forKey: object.sizeName)} catch {print("false")}
+							
+							
+						})
+				}
+				.padding(20)
+					
+				if !object.singleImage {
+					Divider()
+						.background(Color.white)
+					VStack {
+						Text("Number of posts displayed: " + String(Int(object.count)))
+							.bold()
+						HStack {
+							Text("1")
+							Slider(value: $object.count, in: 1...object.maxPosts, step: 1.0) { _ in
+								do {try defaults.setValue(encoder.encode(object), forKey: object.sizeName)} catch {print("false")}
+							}
+							Text(String(Int(object.maxPosts)))
+						}
+					}
+					.padding(20)
+				}
+			
+				}
+				Spacer()
+			}
+			.foregroundColor(.white)
+			.navigationTitle(object.sizeName + " widget")
+		}
 	}
 }
 
-//struct SmallWidgetViews_Previews: PreviewProvider {
-//	static var previews: some View {
-////		WidgetObjectLink(object: WidgetObject.placeholder)
-//	}
-//}
+struct SmallWidgetViews_Previews: PreviewProvider {
+	static var previews: some View {
+		WidgetObjectEditor(object: .constant(WidgetObject.placeholder))
+	}
+}
