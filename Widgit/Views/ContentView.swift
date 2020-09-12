@@ -212,6 +212,7 @@ struct SettingsEditor: View {
 					.font(.title)
 					.padding(20)
 			Button(action: {
+				subber = subber.replacingOccurrences(of: " ", with: "")
 				verification = verifySub(sub: subber)
 				if verification {
 					realSub = subber
