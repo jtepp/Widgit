@@ -141,7 +141,7 @@ struct infoView: View {
 	var body: some View {
 		VStack(alignment:.leading) {
 			Text("r/" + data["sub"]!)
-				.font(.subheadline)
+				.font(.footnote)
 				.bold()
 				.foregroundColor(Color("silver"))
 				.minimumScaleFactor(0.4)
