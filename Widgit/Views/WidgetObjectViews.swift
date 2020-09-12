@@ -28,7 +28,7 @@ struct WidgetObjectLink: View {
 					.padding(.horizontal)
 					
 				RoundedRectangle(cornerRadius: 20)
-					.frame(width: object.width, height: object.height, alignment: .center)
+					.frame(width: object.pwidth, height: object.pheight, alignment: .center)
 					.shadow(radius: 10, x: 8, y: 8)
 					.rotation3DEffect(
 						.degrees(4),
