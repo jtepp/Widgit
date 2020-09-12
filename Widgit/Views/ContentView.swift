@@ -135,7 +135,7 @@ public func loadData(to: inout [[String:String]], limit: Int = 6) {
 	} catch {}
 }
 
-public func returnLoadData(limit: Int = 6) -> [[String:String]] {
+public func returnLoadData(for configuration: ChannelE, limit: Int = 6) -> [[String:String]] {
 	let offset = defaults.integer(forKey: "offset")
 	let sub = defaults.string(forKey: "sub") ?? "all"
 	let sort = defaults.string(forKey: "sort") ?? "hot"
@@ -326,4 +326,31 @@ struct SettingsEditor: View {
 		}
 	}
 	
+}
+
+
+public enum ChannelE: Int {
+	case one = 1
+	case two
+	case three
+	case four
+	case five
+	case six
+	
+	func number() -> Int {
+		switch self {
+			case .one:
+				return 1
+			case .two:
+				return 2
+			case .three:
+				return 3
+			case .four:
+				return 4
+			case .five:
+				return 5
+			case .six:
+				return 6
+		}
+	}
 }

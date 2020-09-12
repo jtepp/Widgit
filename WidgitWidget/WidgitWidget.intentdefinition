@@ -27,63 +27,63 @@
 				</dict>
 				<dict>
 					<key>INEnumValueDisplayName</key>
-					<string>1</string>
+					<string>one</string>
 					<key>INEnumValueDisplayNameID</key>
-					<string>VpOmau</string>
+					<string>SySH3i</string>
 					<key>INEnumValueIndex</key>
 					<integer>1</integer>
 					<key>INEnumValueName</key>
-					<string>1</string>
+					<string>one</string>
 				</dict>
 				<dict>
 					<key>INEnumValueDisplayName</key>
-					<string>2</string>
+					<string>two</string>
 					<key>INEnumValueDisplayNameID</key>
-					<string>ZFVfVt</string>
+					<string>k97hLl</string>
 					<key>INEnumValueIndex</key>
 					<integer>2</integer>
 					<key>INEnumValueName</key>
-					<string>2</string>
+					<string>two</string>
 				</dict>
 				<dict>
 					<key>INEnumValueDisplayName</key>
-					<string>3</string>
+					<string>three</string>
 					<key>INEnumValueDisplayNameID</key>
-					<string>FV8Y7R</string>
+					<string>Lutf1b</string>
 					<key>INEnumValueIndex</key>
 					<integer>3</integer>
 					<key>INEnumValueName</key>
-					<string>3</string>
+					<string>three</string>
 				</dict>
 				<dict>
 					<key>INEnumValueDisplayName</key>
-					<string>4</string>
+					<string>four</string>
 					<key>INEnumValueDisplayNameID</key>
-					<string>VHLBOd</string>
+					<string>t7V3uH</string>
 					<key>INEnumValueIndex</key>
 					<integer>4</integer>
 					<key>INEnumValueName</key>
-					<string>4</string>
+					<string>four</string>
 				</dict>
 				<dict>
 					<key>INEnumValueDisplayName</key>
-					<string>5</string>
+					<string>five</string>
 					<key>INEnumValueDisplayNameID</key>
-					<string>XR5Ivr</string>
+					<string>80axRp</string>
 					<key>INEnumValueIndex</key>
 					<integer>5</integer>
 					<key>INEnumValueName</key>
-					<string>5</string>
+					<string>five</string>
 				</dict>
 				<dict>
 					<key>INEnumValueDisplayName</key>
-					<string>6</string>
+					<string>six</string>
 					<key>INEnumValueDisplayNameID</key>
-					<string>khvCyw</string>
+					<string>25dakz</string>
 					<key>INEnumValueIndex</key>
 					<integer>6</integer>
 					<key>INEnumValueName</key>
-					<string>6</string>
+					<string>six</string>
 				</dict>
 			</array>
 		</dict>
@@ -112,7 +112,7 @@
 			<key>INIntentLastParameterTag</key>
 			<integer>3</integer>
 			<key>INIntentName</key>
-			<string>Configuration</string>
+			<string>SelectSubredditChannel</string>
 			<key>INIntentParameters</key>
 			<array>
 				<dict>
@@ -128,11 +128,6 @@
 					<string>Channel</string>
 					<key>INIntentParameterEnumTypeNamespace</key>
 					<string>88xZPY</string>
-					<key>INIntentParameterMetadata</key>
-					<dict>
-						<key>INIntentParameterMetadataDefaultValue</key>
-						<string>1</string>
-					</dict>
 					<key>INIntentParameterName</key>
 					<string>Channel</string>
 					<key>INIntentParameterPromptDialogs</key>
