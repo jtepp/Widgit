@@ -129,14 +129,12 @@ struct WidgetEntryView: View {
 		switch family {
 			case .systemSmall:
 				WidgetView(object: entry.object[0], data:entry.data)
-					.widgetURL(URL(string: entry.data[0]["link"]!)!)
 			case .systemMedium:
 				WidgetView(object: entry.object[1], data:entry.data)
 			case .systemLarge:
 				WidgetView(object: entry.object[2], data:entry.data)
 			@unknown default:
 				WidgetView(object: entry.object[0], data:entry.data)
-					.widgetURL(URL(string: entry.data[0]["link"]!)!)
 				
 		}
 		

@@ -59,6 +59,7 @@ struct SingleImageView: View {
 				}
 				
 				infoView(data: data)
+					.padding(.trailing, 4)
 				
 			}
 			.foregroundColor(.white)
@@ -69,8 +70,10 @@ struct SingleImageView: View {
 
 //			.padding(.horizontal,family != .systemMedium ? 25 : 5)
 			.padding(.horizontal, 10)
-			.frame(maxWidth: object.width+100, maxHeight: object.height)
-		}}
+			.frame(maxWidth: object.pwidth-(314-UIScreen.main.bounds.width), maxHeight: object.height)
+		}
+		.widgetURL(URL(string: data["link"]!)!)
+	}
 }
 
 struct listView: View {
@@ -84,6 +87,7 @@ struct listView: View {
 					if data.count > i {
 						Link(destination: URL(string: data[i]["link"]!)!) {
 							votesView(data: data[i])
+								.minimumScaleFactor(0.6)
 								.padding(.vertical,pad)
 								.padding(.top, i == 1 ? pad : 0)
 						}
@@ -107,6 +111,7 @@ struct listView: View {
 				
 			}
 		}
+		.frame(maxWidth: object.pwidth-(314-UIScreen.main.bounds.width), maxHeight: object.height)
 	}
 }
 
@@ -139,12 +144,12 @@ struct infoView: View {
 				.font(.subheadline)
 				.bold()
 				.foregroundColor(Color("silver"))
-				.minimumScaleFactor(0.6)
+				.minimumScaleFactor(0.4)
 				.lineLimit(1)
 			Text(data["title"]!)
+				.minimumScaleFactor(0.6)
 				.font(.headline)
 				.lineLimit(2)
-				.minimumScaleFactor(0.8)
 			Text("u/" + data["author"]!)
 				.foregroundColor(Color("silver"))
 				.font(.footnote)

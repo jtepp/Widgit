@@ -13,6 +13,7 @@ struct ContentView: View {
 	@State var widgets = [WidgetObject.placeholder, WidgetObject.placeholderM, WidgetObject.placeholderL]
 	@State var data = [[String:String]]()
 	@State var realSub = defaults.string(forKey: "sub") ?? "all"
+	
 	var body: some View {
 		
 		NavigationView {
@@ -84,10 +85,13 @@ struct ContentView: View {
 				}
 			}
 //			print(data)
-			print(widgets)
-//			print(UIScreen.main.bounds)
+//			print(widgets)
+			
 			
 		}
+		.onOpenURL(perform: { url in
+			UIApplication.shared.open(url)
+		})
 	}
 }
 
