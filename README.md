@@ -6,7 +6,7 @@
 [![Platform](https://img.shields.io/cocoapods/p/LFAlertController.svg?style=flat)](http://cocoapods.org/pods/LFAlertController)
 
 
-![](https://external-preview.redd.it/UB6Uu-tHK0Xp3fu-1WbLzSW_Bkp8hVDbhMjHsP1V7n8.jpg?auto=webp&s=78757ac332524414e0223bea8a7c2ccb8abf3523)
+![](https://imgur.com/a/7OiMvMd)
 
 ## Features
 
@@ -25,7 +25,7 @@
 
 ## Meta
 
-Your Name – jtepp@icloud.com
+Jacob Tepperman – jtepp@icloud.com
 
 [https://github.com/jtepp](https://github.com/jtepp/)
 
