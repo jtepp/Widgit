@@ -37,7 +37,7 @@ struct SettingsEditor: View {
 								Image(systemName: "chevron.right")
 							}
 								.padding(8)
-								.foregroundColor(.white)
+								.foregroundColor(Color("blackwhite"))
 								.background(
 									RoundedRectangle(cornerRadius:10).fill(Color("start")))
 						}

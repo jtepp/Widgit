@@ -58,7 +58,7 @@ struct ContentView: View {
 		.accentColor(Color("blackwhite"))
 		.onAppear(){
 //			let c = JSONEncoder()
-			
+//			
 //			for w in widgets {
 //				do {
 //					try defaults.setValue(c.encode(w), forKey: w.sizeName)

@@ -53,6 +53,7 @@ struct WidgetObjectLink: View {
 
 struct WidgetObjectEditor: View {
 	@Binding var object: WidgetObject
+	@State var placement = 0
 	let encoder = JSONEncoder()
 	var body: some View {
 		ZStack {
@@ -76,9 +77,9 @@ struct WidgetObjectEditor: View {
 //				}
 //				.padding(20)
 					
-				
-					Divider()
-						.background(Color.white)
+//
+//					Divider()
+//						.background(Color.white)
 					VStack {
 						Text("Number of posts displayed: " + String(Int(object.count)))
 							.bold()
@@ -92,10 +93,27 @@ struct WidgetObjectEditor: View {
 						}
 					}
 					.padding(20)
-				
+					Text("Info placement (on image widget):")
+						.font(.title2)
+						.bold()
+						.padding(20)
+					Picker("info", selection: $placement, content: {
+						Text("Top").tag(0)
+						Text("Center").tag(1)
+						Text("Bottom").tag(2)
+					})
+					
+					.pickerStyle(InlinePickerStyle())
 			
-				}
+				}.onChange(of: placement, perform: { _ in
+					object.placement = placement
+					do {try defaults.setValue(encoder.encode(object), forKey: object.sizeName)} catch {}
+					WidgetCenter.shared.reloadAllTimelines()
+				})
 				Spacer()
+			}
+			.onAppear{
+				placement = object.placement
 			}
 			.foregroundColor(Color("blackwhite"))
 			.navigationTitle(object.sizeName + " widget")

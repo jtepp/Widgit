@@ -55,7 +55,7 @@ struct ChannelEditor: View {
 				Divider()
 					.background(Color.white)
 				Text("Sort posts by:")
-					.font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
+					.font(.title2)
 					.bold()
 					.padding(20)
 			}

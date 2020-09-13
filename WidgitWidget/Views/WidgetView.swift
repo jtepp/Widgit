@@ -8,8 +8,6 @@
 import SwiftUI
 import WidgetKit
 
-var scale: CGFloat = UIScreen.main.bounds.width/414
-
 struct WidgetView: View {
 	let object: WidgetObject
 	let data: [[String:String]]
@@ -50,27 +48,45 @@ struct SingleImageView: View {
 	@Environment(\.widgetFamily) var family
 	var body: some View {
 		ZStack{
-			imgFromUrl(url: data["url"]!)
+			if family == .systemMedium {
+				imgFromUrl(url: data["url"]!)
 				.resizable()
 				.aspectRatio(contentMode: .fill)
-			HStack {
-				VStack(alignment:.center) {
-					votesView(data: data)
-				}
-				
-				infoView(data: data)
-					.padding(.trailing, 4)
-				
+				.frame(maxHeight: object.pheight)
+			} else {
+				imgFromUrl(url: data["url"]!)
+					.resizable()
+					.aspectRatio(contentMode: .fill)
 			}
-			.foregroundColor(.white)
-			.background(
-				RoundedRectangle(cornerRadius: 5)
-					.fill(Color.black.opacity(0.6))
-			)
+				
+			VStack {
+				if object.placement == 2 {
+					Spacer()
+				}
+				HStack {
+					VStack(alignment:.center) {
+						votesView(data: data)
+					}
+					
+					infoView(data: data, long: object.width>110)
+						.padding(.trailing, 4)
+						.padding(.vertical, 4)
+					
+				}
+				.foregroundColor(.white)
+				.background(
+					RoundedRectangle(cornerRadius: 5)
+						.fill(Color.black.opacity(0.6))
+				)
 
-//			.padding(.horizontal,family != .systemMedium ? 25 : 5)
-			.padding(.horizontal, 10)
-			.frame(maxWidth: object.pwidth-(314-UIScreen.main.bounds.width), maxHeight: object.height)
+	//			.padding(.horizontal,family != .systemMedium ? 25 : 5)
+				.padding(.horizontal, 10)
+				.frame(maxWidth: object.pwidth-(314-UIScreen.main.bounds.width), maxHeight: object.height)
+				if object.placement == 0 {
+					Spacer()
+				}
+			}
+			.padding(.vertical, family == .systemLarge ? UIScreen.main.bounds.height < 800 ? -88 : -24 : family == .systemMedium ? -18 : 0)
 		}
 		.widgetURL(URL(string: data["link"]!)!)
 	}
@@ -102,7 +118,7 @@ struct listView: View {
 				ForEach(1..<Int(object.count + 1)) { i in
 					if data.count > i {
 						Link(destination: URL(string: data[i]["link"]!)!) {
-					infoView(data: data[i])
+					infoView(data: data[i], long: object.width>110)
 						.padding(.top, i == 1 ? pad : 0)
 						.padding(.vertical,pad)
 						}
@@ -127,40 +143,54 @@ struct votesView: View {
 				.foregroundColor(.red)
 				.background(Rectangle().padding(2).foregroundColor(.white))
 			Text(shortNumber(num:data["ups"]!))
-				.font(.body)
-				.bold()
-			Image(systemName: "arrow.down.square.fill")
-				.foregroundColor(.red)
-				.background(Rectangle().padding(2).foregroundColor(.white))
+				.font(.system(size: 12, weight: .heavy, design: .default))
+//			Image(systemName: "arrow.down.square.fill")
+//				.foregroundColor(.red)
+//				.background(Rectangle().padding(2).foregroundColor(.white))
 		}
 		.foregroundColor(.white)
 		.padding(.horizontal, 4)
 	}
+	
 }
 
 struct infoView: View {
 	var data: [String:String]
+	var long: Bool = false
+	@State var ll = ""
 	var body: some View {
 		VStack(alignment:.leading) {
-			Text("r/" + data["sub"]!)
+			if !long {
+				Text("r/" + data["sub"]!)
 				.font(.footnote)
 				.bold()
 				.foregroundColor(Color("silver"))
 				.minimumScaleFactor(0.4)
 				.lineLimit(1)
+			}
 			Text(data["title"]!)
 				.bold()
 				.lineLimit(2)
 				.font(.title2)
 				.minimumScaleFactor(0.6)
-				
-			Text("u/" + data["author"]!)
+			
+			Text(ll)
 				.foregroundColor(Color("silver"))
 				.font(.footnote)
 				.bold()
 				.minimumScaleFactor(0.6)
 				.lineLimit(1)
 		}.foregroundColor(.white)
+		.onAppear(){
+			if long {
+				ll = "r/"
+				ll = ll + data["sub"]!
+				ll = ll + " • u/"
+				ll = ll + data["author"]!
+			} else {
+				ll = "u/" + data["author"]!
+			}
+		}
 	}
 }
 
