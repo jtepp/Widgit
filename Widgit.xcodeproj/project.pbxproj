@@ -16,13 +16,13 @@
 		0C03A4E42505EC6B0053EE3F /* WidgitWidgetExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 0C03A4D32505EC620053EE3F /* WidgitWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		0C03A4E92505ED740053EE3F /* WidgetObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C1002C825055B3A007BCAC0 /* WidgetObject.swift */; };
 		0C03A4ED2505F2A90053EE3F /* WidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C03A4EC2505F2A90053EE3F /* WidgetView.swift */; };
-		0C03A4EF2505F2B60053EE3F /* MediumWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C03A4EE2505F2B60053EE3F /* MediumWidgetView.swift */; };
-		0C03A4F12505F2BE0053EE3F /* LargeWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C03A4F02505F2BE0053EE3F /* LargeWidgetView.swift */; };
 		0C03A4F22505F3380053EE3F /* WidgetObjectViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CBBC2A325054A9B006DC736 /* WidgetObjectViews.swift */; };
 		0C03A4F32505F42F0053EE3F /* WidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C03A4EC2505F2A90053EE3F /* WidgetView.swift */; };
-		0C03A4F42505F4320053EE3F /* MediumWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C03A4EE2505F2B60053EE3F /* MediumWidgetView.swift */; };
-		0C03A4F52505F4350053EE3F /* LargeWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C03A4F02505F2BE0053EE3F /* LargeWidgetView.swift */; };
 		0C1002C925055B3A007BCAC0 /* WidgetObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C1002C825055B3A007BCAC0 /* WidgetObject.swift */; };
+		0C2B57F1250DBB2D001703AB /* SettingsEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C2B57F0250DBB2D001703AB /* SettingsEditor.swift */; };
+		0C2B57F2250DBBA4001703AB /* SettingsEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C2B57F0250DBB2D001703AB /* SettingsEditor.swift */; };
+		0C2B57F4250DBBDB001703AB /* ChannelEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C2B57F3250DBBDB001703AB /* ChannelEditor.swift */; };
+		0C70287C250DC16C00865474 /* ChannelEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C2B57F3250DBBDB001703AB /* ChannelEditor.swift */; };
 		0C9F7F5625085DE9006ABC08 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0C9F7F5525085DE9006ABC08 /* Assets.xcassets */; };
 		0C9F7F57250865DA006ABC08 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0C9F7F5525085DE9006ABC08 /* Assets.xcassets */; };
 		0CBBC27725054927006DC736 /* WidgitApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CBBC27625054927006DC736 /* WidgitApp.swift */; };
@@ -81,9 +81,9 @@
 		0C03A4DF2505EC6B0053EE3F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0C03A4EA2505EFAC0053EE3F /* WidgitWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WidgitWidgetExtension.entitlements; sourceTree = "<group>"; };
 		0C03A4EC2505F2A90053EE3F /* WidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetView.swift; sourceTree = "<group>"; };
-		0C03A4EE2505F2B60053EE3F /* MediumWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediumWidgetView.swift; sourceTree = "<group>"; };
-		0C03A4F02505F2BE0053EE3F /* LargeWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LargeWidgetView.swift; sourceTree = "<group>"; };
 		0C1002C825055B3A007BCAC0 /* WidgetObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetObject.swift; sourceTree = "<group>"; };
+		0C2B57F0250DBB2D001703AB /* SettingsEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsEditor.swift; sourceTree = "<group>"; };
+		0C2B57F3250DBBDB001703AB /* ChannelEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelEditor.swift; sourceTree = "<group>"; };
 		0C9F7F5525085DE9006ABC08 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0CBBC27325054927006DC736 /* Widgit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Widgit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0CBBC27625054927006DC736 /* WidgitApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgitApp.swift; sourceTree = "<group>"; };
@@ -165,8 +165,6 @@
 			isa = PBXGroup;
 			children = (
 				0C03A4EC2505F2A90053EE3F /* WidgetView.swift */,
-				0C03A4EE2505F2B60053EE3F /* MediumWidgetView.swift */,
-				0C03A4F02505F2BE0053EE3F /* LargeWidgetView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -246,8 +244,10 @@
 		0CBBC2A225054A79006DC736 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				0C2B57F3250DBBDB001703AB /* ChannelEditor.swift */,
 				0CBBC27825054927006DC736 /* ContentView.swift */,
 				0CBBC2A325054A9B006DC736 /* WidgetObjectViews.swift */,
+				0C2B57F0250DBB2D001703AB /* SettingsEditor.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -416,10 +416,10 @@
 				0C03A4E02505EC6B0053EE3F /* WidgitWidget.intentdefinition in Sources */,
 				0CD7706425072909000B0907 /* ContentView.swift in Sources */,
 				0C03A4DB2505EC620053EE3F /* WidgitWidget.swift in Sources */,
-				0C03A4F52505F4350053EE3F /* LargeWidgetView.swift in Sources */,
-				0C03A4F42505F4320053EE3F /* MediumWidgetView.swift in Sources */,
+				0C70287C250DC16C00865474 /* ChannelEditor.swift in Sources */,
 				0C03A4F32505F42F0053EE3F /* WidgetView.swift in Sources */,
 				0C03A4F22505F3380053EE3F /* WidgetObjectViews.swift in Sources */,
+				0C2B57F2250DBBA4001703AB /* SettingsEditor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -429,12 +429,12 @@
 			files = (
 				0C03A4E12505EC6B0053EE3F /* WidgitWidget.intentdefinition in Sources */,
 				0C1002C925055B3A007BCAC0 /* WidgetObject.swift in Sources */,
-				0C03A4F12505F2BE0053EE3F /* LargeWidgetView.swift in Sources */,
-				0C03A4EF2505F2B60053EE3F /* MediumWidgetView.swift in Sources */,
 				0CBBC27925054927006DC736 /* ContentView.swift in Sources */,
 				0CBBC2A425054A9B006DC736 /* WidgetObjectViews.swift in Sources */,
+				0C2B57F4250DBBDB001703AB /* ChannelEditor.swift in Sources */,
 				0C03A4ED2505F2A90053EE3F /* WidgetView.swift in Sources */,
 				0CBBC27725054927006DC736 /* WidgitApp.swift in Sources */,
+				0C2B57F1250DBB2D001703AB /* SettingsEditor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

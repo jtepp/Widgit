@@ -125,11 +125,13 @@ struct votesView: View {
 		VStack {
 			Image(systemName: "arrow.up.square.fill")
 				.foregroundColor(.red)
+				.background(Rectangle().padding(2).foregroundColor(.white))
 			Text(shortNumber(num:data["ups"]!))
-				.font(.subheadline)
+				.font(.body)
 				.bold()
 			Image(systemName: "arrow.down.square.fill")
 				.foregroundColor(.red)
+				.background(Rectangle().padding(2).foregroundColor(.white))
 		}
 		.foregroundColor(.white)
 		.padding(.horizontal, 4)
@@ -147,9 +149,11 @@ struct infoView: View {
 				.minimumScaleFactor(0.4)
 				.lineLimit(1)
 			Text(data["title"]!)
-				.minimumScaleFactor(0.6)
-				.font(.headline)
+				.bold()
 				.lineLimit(2)
+				.font(.title2)
+				.minimumScaleFactor(0.6)
+				
 			Text("u/" + data["author"]!)
 				.foregroundColor(Color("silver"))
 				.font(.footnote)
