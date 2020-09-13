@@ -6,7 +6,7 @@
 [![Platform](https://img.shields.io/cocoapods/p/LFAlertController.svg?style=flat)](http://cocoapods.org/pods/LFAlertController)
 
 
-![](https://imgur.com/a/7OiMvMd)
+![](https://i.imgur.com/R0KFqM0_d.webp?maxwidth=728&fidelity=grand)
 
 ## Features
 
