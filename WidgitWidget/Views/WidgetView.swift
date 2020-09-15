@@ -103,10 +103,12 @@ struct listView: View {
 				ForEach(1..<Int(object.count + 1)) { i in
 					if data.count > i {
 						Link(destination: URL(string: data[i]["link"]!)!) {
+							if i == Int(object.count) {Spacer()}
 							votesView(data: data[i])
 								.minimumScaleFactor(0.6)
 //								.padding(.vertical,pad)
 //								.padding(.top, i == 1 ? pad : 0)
+							if i == 1 {Spacer()}
 							Spacer()
 						}
 //							.onAppear{

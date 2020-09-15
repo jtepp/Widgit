@@ -81,7 +81,9 @@ struct WidgetObjectEditor: View {
 //					Divider()
 //						.background(Color.white)
 					VStack {
-						Text("Number of posts displayed (on list widget): " + String(Int(object.count)))
+						Text("List widget:")
+							.font(.headline)
+						Text("Number of posts displayed: " + String(Int(object.count)))
 							.bold()
 						HStack {
 							Text("1")
@@ -93,10 +95,12 @@ struct WidgetObjectEditor: View {
 						}
 					}
 					.padding(20)
-					Text("Info placement (on image widget):")
+					Text("Image widget:")
+						.font(.headline)
+					Text("Info placement:")
 						.font(.title2)
 						.bold()
-						.padding(20)
+						.padding(.init(top: 0, leading: 20, bottom: 20, trailing: 20))
 					Picker("info", selection: $placement, content: {
 						Text("Top").tag(0)
 						Text("Center").tag(1)
