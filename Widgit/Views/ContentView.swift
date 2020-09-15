@@ -8,11 +8,12 @@
 import SwiftUI
 import WidgetKit
 
+
 var defaults = UserDefaults.init(suiteName: "group.com.jtepp.Widgit")!
 struct ContentView: View {
 	@State var widgets = [WidgetObject.placeholder, WidgetObject.placeholderM, WidgetObject.placeholderL]
 	@State var data = [[String:String]]()
-	
+	let devMode = true
 	var body: some View {
 		
 		NavigationView {
@@ -57,13 +58,13 @@ struct ContentView: View {
 		}
 		.accentColor(Color("blackwhite"))
 		.onAppear(){
-//			let c = JSONEncoder()
-//			
-//			for w in widgets {
-//				do {
-//					try defaults.setValue(c.encode(w), forKey: w.sizeName)
-//				} catch {}
-//			}
+			if devMode {let c = JSONEncoder()
+			
+			for w in widgets {
+				do {
+					try defaults.setValue(c.encode(w), forKey: w.sizeName)
+				} catch {}
+			}}
 			
 //			loadData(to: &data, sub: "clashroyale")
 			let decoder = JSONDecoder()
@@ -90,7 +91,13 @@ struct ContentView: View {
 			
 		}
 		.onOpenURL(perform: { url in
-			UIApplication.shared.open(url)
+			var s = url.absoluteString
+			if defaults.bool(forKey: "apollo"){
+				s = "apollo" + s
+			} else {
+				s = "https" + s
+			}
+			UIApplication.shared.open(URL(string: s)!)
 		})
 	}
 }

@@ -10,6 +10,7 @@ import WidgetKit
 
 struct SettingsEditor: View {
 	@State var update = defaults.double(forKey: "update")
+	@State var apollo = defaults.bool(forKey: "apollo")
 	var body: some View {
 		ZStack {
 			LinearGradient(gradient: Gradient(colors: [Color("start"), Color("end")]), startPoint: .topLeading, endPoint: .bottomTrailing)
@@ -28,6 +29,11 @@ struct SettingsEditor: View {
 						}
 						Text("120")
 					}.padding(20)
+					
+					Toggle(isOn: $apollo){
+						Text("Open links in Apollo")
+					}
+					.padding(20)
 					
 					ForEach(0..<6){ n in
 						NavigationLink(destination: ChannelEditor(n: n+1)){
@@ -53,6 +59,10 @@ struct SettingsEditor: View {
 			
 			
 		}
+			.onChange(of: apollo) { _ in
+				defaults.setValue(apollo, forKey:"apollo")
+				WidgetCenter.shared.reloadAllTimelines()
+			}
 	}
 	
 }

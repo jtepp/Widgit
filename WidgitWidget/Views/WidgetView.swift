@@ -157,7 +157,6 @@ struct votesView: View {
 struct infoView: View {
 	var data: [String:String]
 	var long: Bool = false
-	@State var ll = ""
 	var body: some View {
 		VStack(alignment:.leading) {
 			if !long {
@@ -174,23 +173,14 @@ struct infoView: View {
 				.font(.title2)
 				.minimumScaleFactor(0.6)
 			
-			Text(ll)
+			Text(long ? data["long"]! : data["short"]!)
 				.foregroundColor(Color("silver"))
 				.font(.footnote)
 				.bold()
 				.minimumScaleFactor(0.6)
 				.lineLimit(1)
 		}.foregroundColor(.white)
-		.onAppear(){
-			if long {
-				ll = "r/"
-				ll = ll + data["sub"]!
-				ll = ll + " • u/"
-				ll = ll + data["author"]!
-			} else {
-				ll = "u/" + data["author"]!
-			}
-		}
+		
 	}
 }
 

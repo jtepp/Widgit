@@ -21,7 +21,7 @@ struct WidgetObject: Identifiable, Codable {
 //	var singleImage: Bool = false;
 	var maxPosts: Double
 	static let placeholder = WidgetObject(sizeName: "Small", width: 80, height: 80, count: 1, pwidth: 100, pheight: 100, maxPosts: 2, placement: 1)
-	static let placeholderM = WidgetObject(sizeName: "Medium", width: 250, height: 100, count: 2, pheight: 100, maxPosts: 2, placement: 1)
+	static let placeholderM = WidgetObject(sizeName: "Medium", width: 250, height: 100, count: 3, pheight: 100, maxPosts: 3, placement: 1)
 	static let placeholderL = WidgetObject(sizeName: "Large", width: 250, height: 250, count: 4, maxPosts: 6, placement: 1)
 	var placement: Int = 1
 }
