@@ -81,7 +81,7 @@ struct WidgetObjectEditor: View {
 //					Divider()
 //						.background(Color.white)
 					VStack {
-						Text("Number of posts displayed: " + String(Int(object.count)))
+						Text("Number of posts displayed (on list widget): " + String(Int(object.count)))
 							.bold()
 						HStack {
 							Text("1")
