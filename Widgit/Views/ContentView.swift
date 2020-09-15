@@ -13,7 +13,7 @@ var defaults = UserDefaults.init(suiteName: "group.com.jtepp.Widgit")!
 struct ContentView: View {
 	@State var widgets = [WidgetObject.placeholder, WidgetObject.placeholderM, WidgetObject.placeholderL]
 	@State var data = [[String:String]]()
-	let devMode = true
+	let devMode = false
 	var body: some View {
 		
 		NavigationView {

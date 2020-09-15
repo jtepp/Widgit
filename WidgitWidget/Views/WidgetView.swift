@@ -99,13 +99,15 @@ struct listView: View {
 	var body: some View {
 		HStack(alignment:.center){
 			VStack {
+				Spacer()
 				ForEach(1..<Int(object.count + 1)) { i in
 					if data.count > i {
 						Link(destination: URL(string: data[i]["link"]!)!) {
 							votesView(data: data[i])
 								.minimumScaleFactor(0.6)
-								.padding(.vertical,pad)
-								.padding(.top, i == 1 ? pad : 0)
+//								.padding(.vertical,pad)
+//								.padding(.top, i == 1 ? pad : 0)
+							Spacer()
 						}
 //							.onAppear{
 //						print(String(i) + "list" + object.sizeName)}
@@ -115,12 +117,15 @@ struct listView: View {
 				}
 			}
 			VStack(alignment:.leading) {
+				Spacer()
 				ForEach(1..<Int(object.count + 1)) { i in
 					if data.count > i {
 						Link(destination: URL(string: data[i]["link"]!)!) {
 					infoView(data: data[i], long: object.width>110)
-						.padding(.top, i == 1 ? pad : 0)
-						.padding(.vertical,pad)
+						.minimumScaleFactor(0.6)
+//						.padding(.top, i == 1 ? pad : 0)
+//						.padding(.vertical,pad)
+							Spacer()
 						}
 					}
 				}
