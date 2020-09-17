@@ -20,7 +20,7 @@ struct ContentView: View {
 			ScrollView {
 				//				ForEach(widgets) { w in
 				NavigationLink(
-					destination: SettingsEditor(realSub: $realSub)){
+					destination: SettingsEditor()){
 					VStack {
 						Spacer()
 						HStack {
@@ -135,14 +135,14 @@ public func loadData(to: inout [[String:String]], limit: Int = 6) {
 	} catch {}
 }
 
-public func returnLoadData(limit: Int = 6) -> [[String:String]] {
-	let offset = defaults.integer(forKey: "offset")
-	let sub = defaults.string(forKey: "sub") ?? "all"
-	let sort = defaults.string(forKey: "sort") ?? "hot"
+public func returnLoadData(for configuration: [String:String], limit: Int = 6) -> [[String:String]] {
+	let offset = Int(configuration["offset"]!) ?? 0
+	let sub = configuration["subreddit"] ?? "all"
+	let sort = configuration["sort"] ?? "hot"
 	var to = [[String:String]]()
 	do {
 		var s =  "https://allpurpose.netlify.app/.netlify/functions/reddit?"
-		s = s + "sub=" + sub
+		s = s + "sub=" + sub.replacingOccurrences(of: " ", with: "")
 		s = s + "&sort=" + sort
 		s = s + "&limit=" + String(limit)
 		s = s + "&offset=" + String(offset)
@@ -178,13 +178,13 @@ func verifySub(sub: String) -> Bool {
 
 
 struct SettingsEditor: View {
-	@Binding var realSub: String
-	@State var subber:String = ""
-	@State var verification: Bool = false
-	@State var showBad = false
-	@State var newOffset = defaults.integer(forKey: "offset")
-	@State var newOffsetString = String(defaults.integer(forKey: "offset"))
-	@State var sortValue = defaults.string(forKey: "sort") ?? "hot"
+//	@Binding var realSub: String
+//	@State var subber:String = ""
+//	@State var verification: Bool = false
+//	@State var showBad = false
+//	@State var newOffset = defaults.integer(forKey: "offset")
+//	@State var newOffsetString = String(defaults.integer(forKey: "offset"))
+//	@State var sortValue = defaults.string(forKey: "sort") ?? "hot"
 	@State var update = defaults.double(forKey: "update")
 	var body: some View {
 		ZStack {
@@ -208,110 +208,110 @@ struct SettingsEditor: View {
 //					.font(.callout)
 //					.padding(20)
 			}
-				TextField("Enter subreddit", text: $subber)
-					.font(.title)
-					.padding(20)
-			Button(action: {
-				subber = subber.replacingOccurrences(of: " ", with: "")
-				verification = verifySub(sub: subber)
-				if verification {
-					realSub = subber
-					showBad = false
-					defaults.setValue(realSub, forKey: "sub")
-				} else {
-					showBad = true
-				}
-			}, label: {
-				Text("Check subreddit")
-			})
-			.foregroundColor(.white)
-			.padding(8)
-			.background(
-				RoundedRectangle(cornerRadius: 5)
-					.fill(Color("end"))
-			)
-			Text("Current subreddit: r/" + realSub.lowercased())
-				.padding(20)
-			if showBad {
-			Text("Invalid subreddit")
-				.padding(20)
-			}
-			
-			VStack {
-				Divider()
-					.background(Color.white)
-				Text("Sort posts by:")
-					.font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
-					.bold()
-					.padding(20)
-			}
-			Picker(selection: $sortValue, label: Text("Sort"), content: {
-				Text("Hot").tag("hot")
-				Text("New").tag("new")
-				Text("Rising").tag("rising")
-				Text("Controversial").tag("controversial")
-				Text("Top [All time]").tag("top!t=all")
-				Text("Top [This year]").tag("top!t=year")
-				Text("Top [This month]").tag("top!t=month")
-				Text("Top [This week]").tag("top!t=week")
-				Text("Top [Today]").tag("top!t=day")
-			})
-			.onChange(of: sortValue, perform: { value in
-				defaults.setValue(sortValue, forKey: "sort")
-				WidgetCenter.shared.reloadAllTimelines()
-			})
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			VStack {
-				Divider()
-					.background(Color.white)
-				HStack {
-					
-					Text("Current offset: ")
-						.padding(20)
-					TextField("Enter offset", text: $newOffsetString, onEditingChanged: { _ in
-						let filtered = newOffsetString.filter{ "0123456789".contains($0)}
-							if filtered != newOffsetString {
-								newOffsetString = filtered
-							
-							newOffset = Int(newOffsetString)!
-								WidgetCenter.shared.reloadAllTimelines()
-								
-						}
-					})
-						.font(.title3)
-						.padding(20)
-					.keyboardType(.numberPad)
-					Spacer()
-				}
-			}
-			Button(action: {
-				newOffset = Int(newOffsetString)!
-				defaults.setValue(newOffset, forKey: "offset")
-				WidgetCenter.shared.reloadAllTimelines()
-			}, label: {
-				Text("Set offset")
-			})
-			.foregroundColor(.white)
-			.padding(8)
-			.background(
-				RoundedRectangle(cornerRadius: 5)
-					.fill(Color("end"))
-			)
-			Text("Use an offset if your subreddit has a constant number of pinned or moderator posts that arent filtered out by the Widgit API")
-				.multilineTextAlignment(.center)
-				.lineLimit(4)
-				.padding(20)
-				.font(.callout)
-			
+//				TextField("Enter subreddit", text: $subber)
+//					.font(.title)
+//					.padding(20)
+//			Button(action: {
+//				subber = subber.replacingOccurrences(of: " ", with: "")
+//				verification = verifySub(sub: subber)
+//				if verification {
+//					realSub = subber
+//					showBad = false
+//					defaults.setValue(realSub, forKey: "sub")
+//				} else {
+//					showBad = true
+//				}
+//			}, label: {
+//				Text("Check subreddit")
+//			})
+//			.foregroundColor(.white)
+//			.padding(8)
+//			.background(
+//				RoundedRectangle(cornerRadius: 5)
+//					.fill(Color("end"))
+//			)
+//			Text("Current subreddit: r/" + realSub.lowercased())
+//				.padding(20)
+//			if showBad {
+//			Text("Invalid subreddit")
+//				.padding(20)
+//			}
+//
+//			VStack {
+//				Divider()
+//					.background(Color.white)
+//				Text("Sort posts by:")
+//					.font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
+//					.bold()
+//					.padding(20)
+//			}
+//			Picker(selection: $sortValue, label: Text("Sort"), content: {
+//				Text("Hot").tag("hot")
+//				Text("New").tag("new")
+//				Text("Rising").tag("rising")
+//				Text("Controversial").tag("controversial")
+//				Text("Top [All time]").tag("top!t=all")
+//				Text("Top [This year]").tag("top!t=year")
+//				Text("Top [This month]").tag("top!t=month")
+//				Text("Top [This week]").tag("top!t=week")
+//				Text("Top [Today]").tag("top!t=day")
+//			})
+//			.onChange(of: sortValue, perform: { value in
+//				defaults.setValue(sortValue, forKey: "sort")
+//				WidgetCenter.shared.reloadAllTimelines()
+//			})
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//			VStack {
+//				Divider()
+//					.background(Color.white)
+//				HStack {
+//
+//					Text("Current offset: ")
+//						.padding(20)
+//					TextField("Enter offset", text: $newOffsetString, onEditingChanged: { _ in
+//						let filtered = newOffsetString.filter{ "0123456789".contains($0)}
+//							if filtered != newOffsetString {
+//								newOffsetString = filtered
+//
+//							newOffset = Int(newOffsetString)!
+//								WidgetCenter.shared.reloadAllTimelines()
+//
+//						}
+//					})
+//						.font(.title3)
+//						.padding(20)
+//					.keyboardType(.numberPad)
+//					Spacer()
+//				}
+//			}
+//			Button(action: {
+//				newOffset = Int(newOffsetString)!
+//				defaults.setValue(newOffset, forKey: "offset")
+//				WidgetCenter.shared.reloadAllTimelines()
+//			}, label: {
+//				Text("Set offset")
+//			})
+//			.foregroundColor(.white)
+//			.padding(8)
+//			.background(
+//				RoundedRectangle(cornerRadius: 5)
+//					.fill(Color("end"))
+//			)
+//			Text("Use an offset if your subreddit has a constant number of pinned or moderator posts that arent filtered out by the Widgit API")
+//				.multilineTextAlignment(.center)
+//				.lineLimit(4)
+//				.padding(20)
+//				.font(.callout)
+//
 //			Spacer()
 		}
 		.navigationTitle("Customize settings")
@@ -319,9 +319,10 @@ struct SettingsEditor: View {
 			}
 		.onAppear(){
 			update = defaults.double(forKey: "update")
-			newOffset = defaults.integer(forKey: "offset")
-			newOffsetString = String(defaults.integer(forKey: "offset"))
-			sortValue = defaults.string(forKey: "sort") ?? "hot"
+			WidgetCenter.shared.reloadAllTimelines()
+//			newOffset = defaults.integer(forKey: "offset")
+//			newOffsetString = String(defaults.integer(forKey: "offset"))
+//			sortValue = defaults.string(forKey: "sort") ?? "hot"
 			
 		}
 	}
