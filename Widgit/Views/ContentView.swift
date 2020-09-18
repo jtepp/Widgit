@@ -135,17 +135,17 @@ public func loadData(to: inout [[String:String]], limit: Int = 6) {
 	} catch {}
 }
 
-public func returnLoadData(for configuration: [String:String], limit: Int = 6) -> [[String:String]] {
-	let offset = Int(configuration["offset"]!) ?? 0
-	let sub = configuration["subreddit"] ?? "all"
-	let sort = configuration["sort"] ?? "hot"
+public func returnLoadData(for configuration: ConfigurationIntent, limit: Int = 6) -> [[String:String]] {
+	let offset = configuration.Offset ?? 0
+	let sub = configuration.Subreddit ?? "all"
+	let sort = sortString(enume: configuration.Sort)
 	var to = [[String:String]]()
 	do {
 		var s =  "https://allpurpose.netlify.app/.netlify/functions/reddit?"
 		s = s + "sub=" + sub.replacingOccurrences(of: " ", with: "")
 		s = s + "&sort=" + sort
 		s = s + "&limit=" + String(limit)
-		s = s + "&offset=" + String(offset)
+		s = s + "&offset=" + offset.stringValue
 		print(s)
 		let url = URL(string: s)
 		let a = try String(contentsOf: url!)
@@ -208,6 +208,9 @@ struct SettingsEditor: View {
 				Toggle(isOn:$apollo){
 					Text("Open links in Apollo")
 				}
+				.onChange(of: apollo, perform: { _ in
+					defaults.setValue(apollo, forKey: "apollo")
+				})
 				.padding(20)
 //				Text("For best results, restart your device to enact changes")
 //					.font(.callout)
@@ -333,4 +336,28 @@ struct SettingsEditor: View {
 		}
 	}
 	
+}
+func sortString(enume:SortBy) -> String{
+	switch enume {
+		case .hot:
+			return "hot"
+		case .new:
+			return "new"
+		case .rising:
+			return "rising"
+		case .controversial:
+			return "controversial"
+		case .topall:
+			return "top!all"
+		case .topyear:
+			return "top!year"
+		case .topmonth:
+			return "top!month"
+		case .topweek:
+			return "top!week"
+		case .topday:
+			return "top!day"
+		default:
+			return "hot"
+	}
 }

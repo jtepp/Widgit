@@ -62,7 +62,7 @@ struct Provider: IntentTimelineProvider {
 			} else {print("Large")}
 		}
 		
-		let entry = WidgetObjectEntry(object: [small, medium, large], data:returnLoadData(for: configObject(object:configuration).dictionary()))
+		let entry = WidgetObjectEntry(object: [small, medium, large], data:returnLoadData(for: configuration))
 		completion(entry)
 	}
 	func getTimeline(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
@@ -97,7 +97,7 @@ struct Provider: IntentTimelineProvider {
 		
 		
 //		loadData(to: &data)
-		let entry = WidgetObjectEntry(object:[small, medium, large], data:returnLoadData(for: configObject(object:configuration).dictionary()))
+		let entry = WidgetObjectEntry(object:[small, medium, large], data:returnLoadData(for: configuration))
 		let update = defaults.double(forKey: "update")
 		let nextUpdateDate = Calendar.current.date(byAdding: .minute, value: (Int(update) == 0 ? 5 : Int(update)), to: Date())!
 		let timeline = Timeline(entries: [entry], policy: .after(nextUpdateDate))
@@ -118,7 +118,7 @@ struct Provider: IntentTimelineProvider {
 			if let loadedLarge = try? decoder.decode(WidgetObject.self, from: savedLarge) {
 				widgets[2] = loadedLarge; print(loadedLarge)} else {print("Large")}
 		}
-		return WidgetObjectEntry(object: widgets, data: returnLoadData(for: ["subreddit":"all"]))
+		return WidgetObjectEntry(object: widgets, data: returnLoadData(for: ConfigurationIntent()))
 	}
 }
 
@@ -206,39 +206,3 @@ struct ImageWidget: Widget {
 	}
 }
 
-struct configObject {
-	let object: ConfigurationIntent
-	var sort: String {
-		switch object.Sort {
-			case .hot:
-				return "hot"
-			case .new:
-				return "new"
-			case .rising:
-				return "rising"
-			case .controversial:
-				return "controversial"
-			case .topall:
-				return "top!all"
-			case .topyear:
-				return "top!year"
-			case .topmonth:
-				return "top!month"
-			case .topweek:
-				return "top!week"
-			case .topday:
-				return "top!day"
-			default:
-				return "hot"
-		}
-	}
-	func dictionary() -> [String:String]{
-		let s = object.Subreddit!
-		let off = object.Offset ?? 0
-		let o = off.stringValue
-		let t = sort
-		let a = ["subreddit":s, "offset":o, "sort":t]
-		return a
-	}
-	
-}
