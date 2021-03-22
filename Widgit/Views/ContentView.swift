@@ -90,9 +90,9 @@ struct ContentView: View {
 			
 			
 		}
-		.onOpenURL(perform: { url in
-			UIApplication.shared.open(URL(string: (defaults.bool(forKey: "apollo") ? "apollo" : "https") + url.absoluteString)!)
-		})
+//		.onOpenURL(perform: { url in
+//			UIApplication.shared.open(URL(string: (defaults.bool(forKey: "apollo") ? "apollo" : "https") + url.absoluteString)!)
+//		})
 	}
 }
 
